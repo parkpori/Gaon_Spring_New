@@ -1,0 +1,556 @@
+.header_menu {
+	width: 100%;
+	height: 33px;
+	/* border-bottom: 1px solid #dadada; */
+	background: #222;
+	position: fixed;
+    z-index: 65;
+    top: 0;
+}
+
+.header_sns {
+	float: left;
+}
+
+.header_sns i {
+	color: white;
+	font-size: 20px;
+	padding: 0 3px;
+	line-height: 33px; /* 세로길이랑 똑같이 주면 가운데 정렬 됨 */
+	transition: 0.3s;
+}
+
+.header_sns i:hover {
+	color: #FE9E95;
+}
+
+.header_member {
+	float: right;
+	position: relative;
+}
+
+.header_member li {
+	display: flex;
+	align-items: center;
+	float: left;
+	transition: 0.3s;
+}
+
+.login_bar {
+	display: inline-block;
+	background: #dddddd60;
+	width: 1px;
+	height: 13px;
+}
+
+
+
+
+
+
+
+#loginmenu_droplist {
+	position: relative;
+}
+#mypage {
+	width: 95px;
+	position: relative;
+	padding-right: 14px;
+}
+#mypage_i {
+	position: absolute;
+	font-size: 16px;
+	top: 9px;
+	right: 8px;
+}
+#loginmenu_droplist > div {
+	position: absolute;
+	background: #222;
+	top: 33px;
+}
+#loginmenu_drop {
+	display: none;
+	text-align: center;
+}
+#loginmenu_drop > a {
+	color: white;
+	font-size: 12.5px;
+	display: block;
+	text-decoration: none;
+	margin: 0 auto;
+	padding: 0;
+	width: 95px;
+	height: 29px;
+	line-height: 28.5px;
+}
+#loginmenu_droplist:hover #loginmenu_drop {
+	display: block;
+}
+#loginmenu_drop > a:hover {
+	background: #E65D6E;
+}
+
+
+
+
+
+
+
+.header_member a {
+	color: white;
+	font-size: 14px;
+	width: 70px;
+	height: 33px;
+	line-height: 27px;
+	margin: 0;
+	transition: 0.3s;
+	padding: 3px 0;
+	/* a태그는 inline이라 사이즈 변경이 불가능하기 때문에 inline-block을 써줘야 한다. */
+}
+
+.header_member li:hover .loginmenu {
+	background: #E65D6E;
+	color: white;
+}
+
+.header_arrow {
+	display: inline-block;
+	position: absolute;
+	background: #E65D6E;
+	width: 8px;
+	height: 8px;
+	left: 100.5px;
+	transform: rotate(45deg);
+	animation: animate_1 1.1s infinite;
+}
+
+.header_point {
+	display: inline-block;
+	position: absolute;
+	background: #E65D6E;
+	width: 54px;
+	height: 18px;
+	font-size: 12px;
+	border-radius: 3px;
+	letter-spacing: -0.5px;
+	left: 77.5px;
+	color: white;
+	animation: animate_2 1.1s infinite;
+}
+
+@keyframes animate_1 {
+	0% {top: 25px;}
+	15% {top: 30px;}
+	30% {top: 27px;}
+	40% {top: 31px;}
+	50% {top: 30px;}
+	70% {top: 31px;}
+	100% {top: 31px;}
+}
+@keyframes animate_2 { 
+	0% {top: 29px;}
+	15% {top: 34px;}
+	30% {top: 31px;}
+	40% {top:35px;}
+	50% {top: 34px;}
+	70% {top:35px;}
+	100% {top:35px;}
+}
+.inner_header {
+	max-width: 1300px; /* 모니터가 크면 최대 1440px까지 커진다. */
+	width: 1300px;
+	margin: 0 auto; /* 상하 0, 가로는 자동으로 가운데 맞춰줌 */
+	text-align: center;
+}
+
+
+
+
+
+
+
+
+
+
+.header_logo {
+	width: 1300px;
+	height: 180px;
+	margin: 33px auto 0px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: relative;
+}
+.header_img {
+	position: absolute;
+	top: 30px;
+	left: 25px;
+	display: inline-block;
+	width: 270px;
+	height: 120px;
+	background: white;
+}
+
+.header_title_logo>img {
+	display: inline-block;
+	width: 250px;
+	margin: 20px 85px 20px 92px;
+}
+
+.header_div {
+	position: absolute;
+	display: inline-block;
+	top: 63px;
+	right: 25px;
+	width: 350px;
+}
+.header_text {
+	margin-left: 57px;	
+	margin-bottom: 20px;
+}
+.header_text>a>span {
+	display: inline-block;
+	width: 65px;
+	padding-right: 5px;
+	text-align: center;
+	border-right: 1px solid #ddd;
+	font-family: 'Noto Sans KR', sans-serif;
+	height: 14px;
+	line-height: 14px;
+	font-size: 16px;
+	color: #444;
+	font-weight: bolder;
+	transition: .3s;
+}
+
+#header_event {
+	border-right: 0px;
+}
+
+.header_text>a>span:hover {
+	color: #E65D6E;
+}
+
+.header_search {
+	display: inline-block;
+	justify-content: center;
+	align-items: center;
+	margin: 0 auto;
+	position: absolute;
+	bottom: -22px;
+	right: 30px;
+	width: 261px;
+	transition: .3s;
+}
+
+#header_search_text {
+	height: 32px;
+	width: 100%;
+	border: 1px solid #ddd;
+	border-radius: 50px;
+	padding: 0 38px 0 18px;
+	outline: none;
+	transition: .3s;
+}
+
+.header_search>span {
+	display: inline-block;
+	width: 45px;
+	text-align: center;
+	position: absolute;
+	top: 7px;
+	right: 0;
+}
+
+#search_icon {
+	font-size: 18px;
+	color: #444;
+	transition: .3s;
+}
+
+.header_search:hover #search_icon {
+	color: #E65D6E;
+}
+
+.header_search:hover #header_search_text {
+	border: 1px solid #E65D6E;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+.header_nav {
+	width: 100%;
+	border-top: 1px solid #ddd;
+	border-bottom: 1px solid #ddd;
+	height: 43px;
+	position: relative;
+	top: 0px;
+	background: white;
+	z-index: 60;
+	transition: .3s;
+}
+
+.inner_header>ul>li {
+	display: inline-block;
+	width: 110px;
+	height: 43px;
+	text-align: center;
+	line-height: 43px;
+}
+
+.inner_header>ul>li>a {
+	text-decoration: none;
+	display: inline-block;
+	font-size: 15px;
+	width: 110px;
+	text-align: center;
+	color: #444;
+	font-family: 'Noto Sans KR', sans-serif;
+	position: relative;
+	overflow: hidden;
+	transition: 0.3s;
+}
+
+.inner_header>ul>li>a:before {
+	content: '';
+	width: 200px;
+	border: 2px solid #E65D6E;
+	right: 260px;
+	bottom: 0;
+	position: absolute;
+	transition: 0.3s;
+	z-index: 2;
+}
+
+.inner_header>ul>li>a:hover:before {
+	right: 0;
+}
+
+.inner_header>ul>li>a:hover {
+	color: #E65D6E;
+	display: block;
+}
+
+.inner_header>ul>li:hover .droplist {
+	display: block;
+}
+
+.dropdownlist {
+	position: relative;
+}
+
+.droplist {
+	display: none;
+	position: absolute;
+	top: 42px;
+	left: 0;
+	background-color: #ffffff;
+	border: 1px solid #ddd;
+	border-top: 0px;
+	text-decoration: none;
+}
+
+.list {
+	width: 108px;
+	height: 34px;
+	display: block;
+	color: #444;
+	font-size: 13px;
+	line-height: 34px;
+	text-decoration: none;
+	transition: .2s;
+}
+
+.list:hover {
+	color: #E65D6E;
+	text-decoration: none;
+}
+
+
+
+
+
+
+
+
+
+
+/* 로그인 modal part */
+#modal_all {
+    position: fixed;
+    z-index: 100;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto; /* 넘어가면 스크롤 */
+    background-color: rgba(0,0,0,0.4);
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+#modal_login {
+    position: relative;
+    background-color: white;
+    z-index: 4;
+    width: 350px;
+    height: 440px;
+    border-radius: 2px;
+    padding: 33px 30px;
+    box-shadow: 0 4px 10px 0 rgba(0,0,0,0.1),
+                0 4px 20px 0 rgba(0,0,0,0.12);
+}
+#modal_all_close {
+    position: absolute;
+    z-index: 5;
+    display: inline-block;
+    left: 316px;
+    top: 10px;
+    color: #ddd;
+    font-size: 25px;
+    transition: .3s;
+}
+#modal_all_close:hover {
+    color: #E65D6E;
+}
+#modal_login > img {
+    display: block;
+    margin:0 auto 15px;
+    padding-right: 6px;
+    width: 150px;
+}
+#login_id, #login_pw {
+    display: block;
+    width: 100%;
+    height: 40px;
+    padding: 5px 10px;
+    margin: 8px 0;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    color: #444;
+}
+#login_pw {
+	margin-bottom: 4px;
+}
+input::placeholder {
+    color: #bbb;
+    font-size: 13px;
+}
+.cklogin {
+    margin: 3px 0 0;
+    position: relative;
+    display: inline-block;
+}
+#cklogin_input {
+    visibility: hidden;
+    position: absolute;
+    top: 15px;
+    left: 4px;
+    width: 17px;
+    height: 17px;
+}
+#cklogin_label > span {
+    font-size: 12px;
+    font-weight: lighter;
+    color: #bbb;
+}
+#cklogin_label {
+    background: url('../img/check_off.gif') no-repeat;
+    line-height: 25px;
+    padding-left: 30px;
+}
+#cklogin_input:checked +#cklogin_label {
+    background: url('../img/check_on.gif') no-repeat;
+}
+#cklogin_input:checked +#cklogin_label>span {
+    color: #444;
+}
+#login_button {
+    display: block;
+    background-color: #FE9E95;
+    padding: 10px;
+    border: 0;
+    color: white;
+    border-radius: 5px;
+    margin: 5px auto 10px;
+    width: 100%;
+    font-size: 15px;
+    transition: .3s;
+    outline: none;
+}
+#login_button:hover {
+    background-color: #E65D6E;
+}
+.login_box_inner {
+	display: none;
+	font-size: 12px;
+	color: tomato;
+	text-align: center;
+	margin-bottom: 8px;
+}
+.login_footer {
+    font-size: 12px;
+    padding-bottom: 20px;
+    color: #444;
+    display: flex;
+    justify-content: center;
+    margin-top: 12px;
+    border-bottom: 1px solid #ddd;
+}
+.login_footer > a {
+	display: inline-block;
+	height: 13px;
+    border-left: 1px solid #ddd;
+    transition: .3s;
+    cursor: pointer;
+    line-height: 12px;
+    padding: 0 7px;
+}
+.login_footer > a:first-child {
+    border-left: 0px;
+}
+.login_footer > a:hover {
+    color: #E65D6E;
+    text-decoration: underline;
+}
+.login_final {
+    display: flex;
+    margin-top: 18px;
+    text-align: center;
+    justify-content: center;
+}
+.login_final div {
+    display: inline-block;
+    font-size: 11px;
+    color: #444;
+}
+
+
+
+
+
+
+#loginInfo {
+	color: yellow;
+	font-size: 13px;
+	padding: 0 8px;
+}
+#login_name {
+	display: inline-block;
+	height: 33px;
+	text-align: center;
+	line-height: 33px;
+}
+#loginInfo:hover #login_name {
+	background: #222;
+	color: yellow;
+}
