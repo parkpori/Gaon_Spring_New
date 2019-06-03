@@ -27,6 +27,6 @@ public class ProductServiceImpl implements ProductService {
 		map.put("bList", bList);
 		map.put("nList", nList);
 		
-		return map;
+		return map; // return으로 여러개를 보낼 수 없으니 map에 넣어서 보내줌
 	}
 }

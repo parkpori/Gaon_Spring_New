@@ -10,8 +10,8 @@
 <head>
 <meta charset="UTF-8">
 <!-- ${path}: el태그 -->
-<link rel="stylesheet" href="resources/css/common.css?v=1">
-<link rel="stylesheet" href="resources/css/header.css?v=1">
+<link rel="stylesheet" href="${path}/resources/css/common.css?v=1">
+<link rel="stylesheet" href="${path}/resources/css/header.css?v=1">
 <title>Insert title here</title>
 </head>
 <body>
@@ -21,7 +21,7 @@
             <a id="modal_all_close">
                 <i class="fas fa-times-circle"></i>
             </a>
-            <img src="resources/img/logo.png" alt="로고이미지">
+            <img src="${path}/resources/img/logo.png" alt="로고이미지">
             <div>
                 <input type="text" id="login_id" placeholder="이메일 입력">
                 <input type="password" id="login_pw" placeholder="패스워드 입력">
@@ -38,7 +38,7 @@
             <div class="login_footer">
                 <a><span>아이디 찾기</span></a>
                 <a><span>비밀번호 찾기</span></a>
-                <a href="${path}/constract.gaon" id="modal_member"><span>회원가입</span></a>
+                <a href="${path}/member/constract" id="modal_member"><span>회원가입</span></a>
             </div>
             <div class="login_final">
                     <div>
@@ -69,7 +69,7 @@
 		                    <c:when test="${empty sessionScope.loginUser}">
 		                        <li><a class="loginmenu" id="login_open">로그인</a>
 		                        </li>
-		                        <li><a href="${path}/constract.gaon" class="loginmenu" id="join_open">회원가입</a>
+		                        <li><a href="${path}/member/constract" class="loginmenu" id="join_open">회원가입</a>
 		                        </li>
 		                        <!-- <span class="header_arrow"></span>
                     			<span class="header_point">+2,000 P</span> -->
@@ -118,7 +118,7 @@
 	        </div>
 	        <a href="index.gaon">
 	            <span class="header_title_logo">
-	                <img src="resources/img/logo.png" alt="로고이미지">
+	                <img src="${path}/resources/img/logo.png" alt="로고이미지">
 	            </span>
             </a>
             <div class="header_div">

@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="${path}/css/common.css?v=1">
+<link rel="stylesheet" href="${path}/resources/css/common.css?v=1">
 <title>Insert title here</title>
 	<style type="text/css">
 
@@ -55,24 +55,24 @@
 		}
 		.inner_box > label {
 			display: block;
-			background: url('img/check_off.gif') 100% 50% no-repeat;
+			background: url('${path}/resources/img/check_off.gif') 100% 50% no-repeat;
 		}
 		#constract_ck1:checked +label {
-			background: url('img/check_on.gif') 100% 50% no-repeat;
+			background: url('${path}/resources/img/check_on.gif') 100% 50% no-repeat;
 			color: #E65D6E;
 			font-weight: bolder;
 		}
 		#constract_ck2:checked +label {
-			background: url('img/check_on.gif') 100% 50% no-repeat;
+			background: url('${path}/resources/img/check_on.gif') 100% 50% no-repeat;
 		}
 		#constract_ck3:checked +label {
-			background: url('img/check_on.gif') 100% 50% no-repeat;
+			background: url('${path}/resources/img/check_on.gif') 100% 50% no-repeat;
 		}
 		#constract_ck4:checked +label {
-			background: url('img/check_on.gif') 100% 50% no-repeat;
+			background: url('${path}/resources/img/check_on.gif') 100% 50% no-repeat;
 		}
 		#constract_ck5:checked +label {
-			background: url('img/check_on.gif') 100% 50% no-repeat;
+			background: url('${path}/resources/img/check_on.gif') 100% 50% no-repeat;
 		}
 		.terms_box {
 			position: relative;
@@ -213,7 +213,7 @@
 				</label>
 			</div>
 			<div class="constract_btn">
-				<a href="${path}/index.gaon">
+				<a>
 					<span id="btn_default">비동의</span>
 				</a>
 				<a>
@@ -228,7 +228,7 @@
 		$(document).ready(function(){
 			
 			$("#btn_default").click(function(){
-	        	location.href = "index.gaon";
+	        	location.href = "${path}/";
 	        });
 			
 			$("#constract_ck1").click(function(){
@@ -246,7 +246,7 @@
 				var filsu2 = $("#constract_ck3").is(":checked");
 				
 				if(filsu1 == true && filsu2 == true){
-					location.href = "member.gaon";
+					location.href = "${path}/member/create";
 				} else {
 					return false;
 				}

@@ -164,15 +164,15 @@ function ajaxCheck(memId) {
 	
 	// id에 값이 있는 경우에만 ajax 동작!
     $.ajax({
-   		url: "idCheck.gaon",
+   		url: "idcheck?id="+memId,
    		type: "POST", // 보내는 방식(운송역할)
-   		dataType: "json", // 거의 ajax에서는 json만 쓴다, 데이터 가방의 타입(포장)
-   		data: "id="+memId, // url의 쿼리스트링(-> url:"idCheck.gaon"?"id="+id와 같음)
+   		contentType: "application/json", // 거의 ajax에서는 json만 쓴다, 데이터 가방의 타입(포장)
    		success: function(data) { // data: Action에서 return으로 보내준 값을 받음
+   			console.log(data);
    			// 29. Action단에서 전송한 message, id를 data매개변수로 받음
    			// 30. data.message의 값이 -1이면 => 중복메세지 출력
    			// 	   data.message의 값이 1이면 => 사용가능메세지 출력
-   			if (data.message == "-1") {
+   			if (data == 1) {
    				$('.box_inner').eq(0).css('color', 'tomato')
                    			 		 .css('display', 'block')
                    					 .text("이미 사용 중인 아이디입니다.");

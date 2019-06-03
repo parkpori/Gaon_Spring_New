@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="${path}/css/common.css?v=1">
+<link rel="stylesheet" href="${path}/resources/css/common.css?v=1">
 <title>Insert title here</title>
 	<style type="text/css">
 		.main_div {
@@ -92,7 +92,7 @@
             margin: 8px 15px 0 0;
         }
         #sign_ckmessage_text {
-            background: url('img/check_off.gif') no-repeat;
+            background: url('${path}/resources/img/check_off.gif') no-repeat;
             height: 25px;
             margin: 8px 0 10px 0;
         }
@@ -104,7 +104,7 @@
             line-height: 25px;
         }
         #sign_ckmessage:checked +#sign_ckmessage_text {
-            background: url('img/check_on.gif') no-repeat;
+            background: url('${path}/resources/img/check_on.gif') no-repeat;
         }
         #sign_ckmessage:checked +#sign_ckmessage_text>span {
             color: #444;
@@ -142,7 +142,7 @@
             margin: 8px 15px 0 0;
         }
         #sign_ckemail_text {
-            background: url('img/check_off.gif') no-repeat;
+            background: url('${path}/resources/img/check_off.gif') no-repeat;
             height: 25px;
             margin: 8px 0 10px 0;
         }
@@ -155,7 +155,7 @@
         }
 
         #sign_ckemail:checked +#sign_ckemail_text {
-            background: url('img/check_on.gif') no-repeat;
+            background: url('${path}/resources/img/check_on.gif') no-repeat;
         }
         #sign_ckemail:checked +#sign_ckemail_text>span {
             color: #444;
@@ -361,346 +361,356 @@
 	            </div>
 	            <div id="sign_birth_text">등록된 생일에 생일 축하 쿠폰을 선물로 드립니다.(연1회)</div>
 	            <div id="sign_finish">
-	            	<span class="btn_type"><button href="${path}/constract.gaon" id="btn_default">뒤로가기</button></span>
-	                <span class="btn_type"><button type="submit" id="btn_agree">회원가입</button></span>
+	            	<span class="btn_type"><button id="btn_default">뒤로가기</button></span>
+	                <span class="btn_type"><button id="btn_agree">회원가입</button></span>
 	            </div>
 	        </div>
 	    </div>
 	</form>
-    <script type="text/javascript" src="js/validation.js"></script>
+    <script type="text/javascript" src="${path}/resources/js/validation.js"></script>
     <script type="text/javascript">
         
         $(document).ready(function() {
-        	
+        	test();
         	$('#btn_default').click(function(){
-        		location.href = "constract.gaon";
+        		location.href = "${path}/";
         	});
-
-
-            var addressReg = RegExp(/^[가-힣0-9._-]{1,100}$/);
-            var yyReg = RegExp(/^[0-9]{4}$/);
-            var ddReg = RegExp(/^[0-9]{1,2}$/);
-
             
-            // 1. input(#id)에 값을 입력 후 blur()하면 이벤트 발생
-            $('#sign_id').blur(function() {
-				
-            	// 2. input(#id) value값을 가져와 memId에 담음
-                var memId = $.trim($('#sign_id').val());
+            $('#btn_agree').click(function(){
+            	alert("??");
+            	test();
+            	if (test() == true) {
+            		alert("!!");
+            		location.href = "${path}/";
+            		$("#frm_mem").submit();
+				}
+        	});
+            
+            function test(){
+            	// 1. input(#id)에 값을 입력 후 blur()하면 이벤트 발생
+                $('#sign_id').blur(function() {
+    				
+                	// 2. input(#id) value값을 가져와 memId에 담음
+                    var memId = $.trim($('#sign_id').val());
+                    
+                	// 3. joinValidate의 checkId() 함수를 실행, memId를 매개변수로 보냄
+                	// 7. checkId() 함수를 실행 후 결과값(code, desc)을 변수 checkResult에 담음
+                    var checkResult = joinValidate.checkId(memId);
+                    
+                	
+                    if(checkResult.code != 0) {
+                    	// 8-1(실패). code값이 0이 아닌경우 => 유효한 값이 아님
+                    	//			  				경고메세지 출력!
+                    	$('.box_inner').eq(0).text(checkResult.desc)
+                    						.css('color', 'tomato')
+    										.css('display', 'block');
+                    	return false;
+                    } else {
+                    	// 8-2(성공). code값이 0인 경우 => 유효한 값
+                    	// 				중복값인지 ajax로 검증 시작!
+                    	// 9. ajaxCheck() 메서드 실행, memId를 매개변수로 보냄
+                    	if(ajaxCheck(memId) == "1"){
+                    		// 31. ajaxCheck(memId)의 return값이 1이면 return true;
+                    		return true;
+                    	}
+                    }
+                    return false; // 위에서 return true에서 빠져나온 값들의 누락 방지
+                });
                 
-            	// 3. joinValidate의 checkId() 함수를 실행, memId를 매개변수로 보냄
-            	// 7. checkId() 함수를 실행 후 결과값(code, desc)을 변수 checkResult에 담음
-                var checkResult = joinValidate.checkId(memId);
+
                 
-            	
-                if(checkResult.code != 0) {
-                	// 8-1(실패). code값이 0이 아닌경우 => 유효한 값이 아님
-                	//			  				경고메세지 출력!
-                	$('.box_inner').eq(0).text(checkResult.desc)
-                						.css('color', 'tomato')
-										.css('display', 'block');
-                	return false;
-                } else {
-                	// 8-2(성공). code값이 0인 경우 => 유효한 값
-                	// 				중복값인지 ajax로 검증 시작!
-                	// 9. ajaxCheck() 메서드 실행, memId를 매개변수로 보냄
-                	if(ajaxCheck(memId) == "1"){
-                		// 31. ajaxCheck(memId)의 return값이 1이면 return true;
-                		return true;
+                $('#sign_pw1').blur(function() {
+                	
+    				var memPw = $.trim($('#sign_pw1').val());
+    				var memRpw = $.trim($('#sign_pw2').val());
+                    
+                    var checkResult = joinValidate.checkPw(memPw, memRpw);
+                    
+                    if(checkResult.code != 0) {
+                    	$('.box_inner').eq(1).text(checkResult.desc)
+                    						.css('color', 'tomato')
+    										.css('display', 'block');
+                    	return false;
+                    } else {
+                    	$('.box_inner').eq(1).css('display', 'none');
+            			
+                        if (memRpw != null || memRpw.length != 0) {
+            				if (memPw == memRpw) { // pw, rpw가 같은지 확인
+            					$('.box_inner').eq(2).css('display', 'none');
+            				} else {
+            					$('.box_inner').eq(2).css('color', 'tomato')
+             					 					 .css('display', 'block')
+             					 					 .text('입력하신 비밀번호가 일치하지 않습니다.');
+            					return false;
+            				}
+            			}
+                    	return true;
+                    }
+                    return false; // 누락 방지
+                });
+                
+                $('#sign_pw2').blur(function() {
+                	var memPw = $.trim($('#sign_pw1').val());
+    				var memRpw = $.trim($('#sign_pw2').val());
+                    
+                    var checkResult = joinValidate.checkRpw(memPw, memRpw);
+                    
+                    if(checkResult.code != 0) {
+                    	$('.box_inner').eq(2).text(checkResult.desc)
+                    						.css('color', 'tomato')
+    										.css('display', 'block');
+                    	return false;
+                    } else {
+                    	$('.box_inner').eq(2).css('display', 'none');
+            			
+                        if (memPw != null || memPw.length != 0) {
+            				if (memPw == memRpw) { // pw, rpw가 같은지 확인
+            					$('.box_inner').eq(2).css('display', 'none');
+            				} else {
+            					$('.box_inner').eq(2).css('color', 'tomato')
+             					 					 .css('display', 'block')
+             					 					 .text('입력하신 비밀번호가 일치하지 않습니다.');
+            					return false;
+            				}
+            			}
+                    	return true;
+                    }
+                    return false; // 누락 방지
+                });
+
+                
+                $('#sign_name').blur(function() {
+    				
+                    var name = $.trim($(this).val());
+                    var nameReg = RegExp(/^[가-힣]{2,8}$/);
+                    var regEmpty = /\s/g;
+
+                    if (name == '' || name.length == 0) {
+                        //alert('test');
+                        $('.box_inner').eq(3).css('color', 'tomato')
+                                             .css('display', 'block')
+                                             .text("필수입력 정보입니다.");
+                        return false;
+                    } else if (name.match(regEmpty)) {
+                    	$('.box_inner').eq(3).css('color', 'tomato')
+    				 	 					 .css('display', 'block')
+    					 					 .text("공백 없이 표준 한글 2~8자까지 가능합니다.");
+    					return false;
+    				} else if (!nameReg.test(name)) {
+                        $('.box_inner').eq(3).css('color', 'tomato')
+                                             .css('display', 'block')
+                                             .text("표준 한글 2~8자까지 가능합니다.");
+                        return false;
+                    } else {
+                        $('.box_inner').eq(3).css('display', 'none');
+                        return true;
+                    }
+                });
+
+                
+    			$("#sign_phone_1").blur(function() {
+    				
+                    var phone = $.trim($(this).val());
+                    var regEmpty = /\s/g;
+
+                    if (phone == '' || phone.length == 0) {
+                        //alert('test');
+                        $('.box_inner_phone').css('color', 'tomato')
+                                             .css('display', 'block')
+                                             .text("필수입력 정보입니다.");
+                        return false;
+                    } else if ($.isNumeric(phone) == false) {
+                    	$('.box_inner_phone').css('color', 'tomato')
+    				 	 					 .css('display', 'block')
+    					 					 .text("숫자만 입력해주세요.");
+    					return false;
+    				} else if (phone.indexOf("01") != 0) {
+    					// indexOf("01"): 01로 시작
+    					// lastindexOf
+                        $('.box_inner_phone').css('color', 'tomato')
+                                             .css('display', 'block')
+                                             .text("번호가 유효하지 않습니다.");
+                        return false;
+                    } else if (phone.length != 3) {
+                        $('.box_inner_phone').css('color', 'tomato')
+    					                     .css('display', 'block')
+    					                     .text("번호가 유효하지 않습니다.");
+    					return false;
+    				} else {
+                    	$('.box_inner_phone').css('display', 'none');
+                    	return true;
+                    }
+                });
+    			
+    			
+    			$("#sign_phone_2").blur(function() {
+    				
+                    var phone = $.trim($(this).val());
+                    var regEmpty = /\s/g;
+
+                    if (phone == '' || phone.length == 0) {
+                        //alert('test');
+                        $('.box_inner_phone').css('color', 'tomato')
+                                             .css('display', 'block')
+                                             .text("필수입력 정보입니다.");
+                        return false;
+                    } else if ($.isNumeric(phone) == false) {
+                    	$('.box_inner_phone').css('color', 'tomato')
+    				 	 					 .css('display', 'block')
+    					 					 .text("숫자만 입력해주세요.");
+    					return false;
+    				} else if (phone.length != 4) {
+                        $('.box_inner_phone').css('color', 'tomato')
+    					                     .css('display', 'block')
+    					                     .text("번호가 유효하지 않습니다.");
+    					return false;
+    				} else {
+                    	$('.box_inner_phone').css('display', 'none');
+                    	return true;
+                    }
+                });
+    			
+    			
+    			$("#sign_phone_3").blur(function() {
+    				
+                    var phone = $.trim($(this).val());
+                    var regEmpty = /\s/g;
+
+                    if (phone == '' || phone.length == 0) {
+                        //alert('test');
+                        $('.box_inner_phone').css('color', 'tomato')
+                                             .css('display', 'block')
+                                             .text("필수입력 정보입니다.");
+                        return false;
+                    } else if ($.isNumeric(phone) == false) {
+                    	$('.box_inner_phone').css('color', 'tomato')
+    				 	 					 .css('display', 'block')
+    					 					 .text("숫자만 입력해주세요.");
+    					return false;
+    				} else if (phone.length != 4) {
+                        $('.box_inner_phone').css('color', 'tomato')
+    					                     .css('display', 'block')
+    					                     .text("번호가 유효하지 않습니다.");
+    					return false;
+    				} else {
+                    	$('.box_inner_phone').css('display', 'none');
+                    	return true;
+                    }
+                });
+    			
+    			
+                var emailReg = RegExp(/^[A-Za-z0-9_.-]{2,20}$/);
+                var uemailReg = RegExp(/^@([a-z0-9-]+\.)+[a-z]{2,4}$/);
+    			
+    			$('#sign_email_id').blur(function() {
+    				
+                    var email = $.trim($('#sign_email_id').val());
+                    var url = $.trim($('#sign_email_url').val());
+                    var regEmpty = /\s/g;
+                    var emailReg = RegExp(/^[A-Za-z0-9._-]+@[A-Za-z0-9._-]+\.[A-Za-z]{2,4}$/i);
+
+                    if (email == '' || email.length == 0) {
+                        //alert('test');
+                        $('.box_inner_email').css('color', 'tomato')
+                                             .css('display', 'block')
+                                             .text("필수입력 정보입니다.");
+                        return false;
+                    } else if (email.match(regEmpty)) {
+                    	$('.box_inner_email').css('color', 'tomato')
+    				 	 					 .css('display', 'block')
+    					 					 .text("올바른 이메일을 입력해주세요.");
+    					return false;
+    				} else if (url != "" || url.length != 0) {
+    					
+    					var fullMail = email+"@"+url;
+    					
+    					if (!emailReg.test(fullMail)) {
+    						$('.box_inner_email').css('color', 'tomato')
+    	 					 					 .css('display', 'block')
+    	 					 					 .text("올바른 이메일을 입력해주세요.");
+    						return false;
+    					} else {
+    						$('.box_inner_email').css('display', 'none');
+    						return true;
+    					}
+    				}
+                });
+    			
+    			
+    			$('#sign_email_url').blur(function() {
+    				
+                    var email = $.trim($('#sign_email_id').val());
+                    var url = $.trim($('#sign_email_url').val());
+                    var regEmpty = /\s/g;
+                    var emailReg = RegExp(/^[A-Za-z0-9._-]{3,15}+@[A-Za-z0-9._-]+\.[A-Za-z]{2,4}$/i);
+
+                    if (url == '' || url.length == 0) {
+                        //alert('test');
+                        $('.box_inner_email').css('color', 'tomato')
+                                             .css('display', 'block')
+                                             .text("필수입력 정보입니다.");
+                        return false;
+                    } else if (url.match(regEmpty)) {
+                    	$('.box_inner_email').css('color', 'tomato')
+    				 	 					 .css('display', 'block')
+    					 					 .text("올바른 이메일을 입력해주세요.");
+    					return false;
+    				} else if (url != "" || url.length != 0) {
+    					
+    					var fullMail = email+"@"+url;
+    					
+    					if (!emailReg.test(fullMail)) {
+    						$('.box_inner_email').css('color', 'tomato')
+    	 					 					 .css('display', 'block')
+    	 					 					 .text("올바른 이메일을 입력해주세요.");
+    						return false;
+    					} else {
+    						$('.box_inner_email').css('display', 'none');
+    						return true;
+    					}
+    				}
+                });
+
+                $('#sign_email_select').change(function() {
+                    var eUrl = $(this).val();
+
+                    if (eUrl == 'directVal') {
+                        $('#sign_email_url').val('');
+                        $('#sign_email_url').focus();
+                        $('#sign_email_url').removeAttr('readonly');
+                    } else {
+                        $('#sign_email_url').val(eUrl);
+                        $('#sign_email_url').prop('readonly', true);
+                        $('#sign_email_id').blur();
+                    }
+                });
+                
+                
+                // 우편번호, 주소 클릭시 다음주소API 창 출력
+                $('.addrbtn').click(function(){
+                	var zipcode = $('.addrbtn').eq(0).val();
+                	var addr = $('.addrbtn').eq(1).val();
+                	// alert(zipcode + ', ' + addr);
+                	
+                	if(zipcode == '' || addr == '') {
+                		$('#sample4_postcode2').click();
                 	}
-                }
-                return false; // 위에서 return true에서 빠져나온 값들의 누락 방지
-            });
-            
-
-            
-            $('#sign_pw1').blur(function() {
-            	
-				var memPw = $.trim($('#sign_pw1').val());
-				var memRpw = $.trim($('#sign_pw2').val());
+                });
                 
-                var checkResult = joinValidate.checkPw(memPw, memRpw);
                 
-                if(checkResult.code != 0) {
-                	$('.box_inner').eq(1).text(checkResult.desc)
-                						.css('color', 'tomato')
-										.css('display', 'block');
-                	return false;
-                } else {
-                	$('.box_inner').eq(1).css('display', 'none');
-        			
-                    if (memRpw != null || memRpw.length != 0) {
-        				if (memPw == memRpw) { // pw, rpw가 같은지 확인
-        					$('.box_inner').eq(2).css('display', 'none');
-        				} else {
-        					$('.box_inner').eq(2).css('color', 'tomato')
-         					 					 .css('display', 'block')
-         					 					 .text('입력하신 비밀번호가 일치하지 않습니다.');
-        					return false;
-        				}
-        			}
+                
+                $('#sample6_detailAddress').blur(function(){
+                	var daddr = $(this).val();
+                	
+                	if(daddr == "" || daddr.length == 0) {
+                		$("#box_inner_address").css('color', 'tomato')
+     					 					.css('display', 'block')
+    	 					 				.text("필수입력 정보입니다.");
+    				return false;
+                	}
                 	return true;
-                }
-                return false; // 누락 방지
-            });
-            
-            $('#sign_pw2').blur(function() {
-            	var memPw = $.trim($('#sign_pw1').val());
-				var memRpw = $.trim($('#sign_pw2').val());
-                
-                var checkResult = joinValidate.checkRpw(memPw, memRpw);
-                
-                if(checkResult.code != 0) {
-                	$('.box_inner').eq(2).text(checkResult.desc)
-                						.css('color', 'tomato')
-										.css('display', 'block');
-                	return false;
-                } else {
-                	$('.box_inner').eq(2).css('display', 'none');
-        			
-                    if (memPw != null || memPw.length != 0) {
-        				if (memPw == memRpw) { // pw, rpw가 같은지 확인
-        					$('.box_inner').eq(2).css('display', 'none');
-        				} else {
-        					$('.box_inner').eq(2).css('color', 'tomato')
-         					 					 .css('display', 'block')
-         					 					 .text('입력하신 비밀번호가 일치하지 않습니다.');
-        					return false;
-        				}
-        			}
-                	return true;
-                }
-                return false; // 누락 방지
-            });
-
-            
-            $('#sign_name').blur(function() {
-				
-                var name = $.trim($(this).val());
-                var nameReg = RegExp(/^[가-힣]{2,8}$/);
-                var regEmpty = /\s/g;
-
-                if (name == '' || name.length == 0) {
-                    //alert('test');
-                    $('.box_inner').eq(3).css('color', 'tomato')
-                                         .css('display', 'block')
-                                         .text("필수입력 정보입니다.");
-                    return false;
-                } else if (name.match(regEmpty)) {
-                	$('.box_inner').eq(3).css('color', 'tomato')
-				 	 					 .css('display', 'block')
-					 					 .text("공백 없이 표준 한글 2~8자까지 가능합니다.");
-					return false;
-				} else if (!nameReg.test(name)) {
-                    $('.box_inner').eq(3).css('color', 'tomato')
-                                         .css('display', 'block')
-                                         .text("표준 한글 2~8자까지 가능합니다.");
-                    return false;
-                } else {
-                    $('.box_inner').eq(3).css('display', 'none');
-                }
-            });
-
-            
-			$("#sign_phone_1").blur(function() {
-				
-                var phone = $.trim($(this).val());
-                var regEmpty = /\s/g;
-
-                if (phone == '' || phone.length == 0) {
-                    //alert('test');
-                    $('.box_inner_phone').css('color', 'tomato')
-                                         .css('display', 'block')
-                                         .text("필수입력 정보입니다.");
-                    return false;
-                } else if ($.isNumeric(phone) == false) {
-                	$('.box_inner_phone').css('color', 'tomato')
-				 	 					 .css('display', 'block')
-					 					 .text("숫자만 입력해주세요.");
-					return false;
-				} else if (phone.indexOf("01") != 0) {
-					// indexOf("01"): 01로 시작
-					// lastindexOf
-                    $('.box_inner_phone').css('color', 'tomato')
-                                         .css('display', 'block')
-                                         .text("번호가 유효하지 않습니다.");
-                    return false;
-                } else if (phone.length != 3) {
-                    $('.box_inner_phone').css('color', 'tomato')
-					                     .css('display', 'block')
-					                     .text("번호가 유효하지 않습니다.");
-					return false;
-				} else {
-                	$('.box_inner_phone').css('display', 'none');
-
-                }
-            });
-			
-			
-			$("#sign_phone_2").blur(function() {
-				
-                var phone = $.trim($(this).val());
-                var regEmpty = /\s/g;
-
-                if (phone == '' || phone.length == 0) {
-                    //alert('test');
-                    $('.box_inner_phone').css('color', 'tomato')
-                                         .css('display', 'block')
-                                         .text("필수입력 정보입니다.");
-                    return false;
-                } else if ($.isNumeric(phone) == false) {
-                	$('.box_inner_phone').css('color', 'tomato')
-				 	 					 .css('display', 'block')
-					 					 .text("숫자만 입력해주세요.");
-					return false;
-				} else if (phone.length != 4) {
-                    $('.box_inner_phone').css('color', 'tomato')
-					                     .css('display', 'block')
-					                     .text("번호가 유효하지 않습니다.");
-					return false;
-				} else {
-                	$('.box_inner_phone').css('display', 'none');
-
-                }
-            });
-			
-			
-			$("#sign_phone_3").blur(function() {
-				
-                var phone = $.trim($(this).val());
-                var regEmpty = /\s/g;
-
-                if (phone == '' || phone.length == 0) {
-                    //alert('test');
-                    $('.box_inner_phone').css('color', 'tomato')
-                                         .css('display', 'block')
-                                         .text("필수입력 정보입니다.");
-                    return false;
-                } else if ($.isNumeric(phone) == false) {
-                	$('.box_inner_phone').css('color', 'tomato')
-				 	 					 .css('display', 'block')
-					 					 .text("숫자만 입력해주세요.");
-					return false;
-				} else if (phone.length != 4) {
-                    $('.box_inner_phone').css('color', 'tomato')
-					                     .css('display', 'block')
-					                     .text("번호가 유효하지 않습니다.");
-					return false;
-				} else {
-                	$('.box_inner_phone').css('display', 'none');
-
-                }
-            });
-			
-			
-            var emailReg = RegExp(/^[A-Za-z0-9_.-]{2,20}$/);
-            var uemailReg = RegExp(/^@([a-z0-9-]+\.)+[a-z]{2,4}$/);
-			
-			$('#sign_email_id').blur(function() {
-				
-                var email = $.trim($('#sign_email_id').val());
-                var url = $.trim($('#sign_email_url').val());
-                var regEmpty = /\s/g;
-                var emailReg = RegExp(/^[A-Za-z0-9._-]+@[A-Za-z0-9._-]+\.[A-Za-z]{2,4}$/i);
-
-                if (email == '' || email.length == 0) {
-                    //alert('test');
-                    $('.box_inner_email').css('color', 'tomato')
-                                         .css('display', 'block')
-                                         .text("필수입력 정보입니다.");
-                    return false;
-                } else if (email.match(regEmpty)) {
-                	$('.box_inner_email').css('color', 'tomato')
-				 	 					 .css('display', 'block')
-					 					 .text("올바른 이메일을 입력해주세요.");
-					return false;
-				} else if (url != "" || url.length != 0) {
-					
-					var fullMail = email+"@"+url;
-					
-					if (!emailReg.test(fullMail)) {
-						$('.box_inner_email').css('color', 'tomato')
-	 					 					 .css('display', 'block')
-	 					 					 .text("올바른 이메일을 입력해주세요.");
-						return false;
-					} else {
-						$('.box_inner_email').css('display', 'none');
-					}
-				}
-            });
-			
-			
-			$('#sign_email_url').blur(function() {
-				
-                var email = $.trim($('#sign_email_id').val());
-                var url = $.trim($('#sign_email_url').val());
-                var regEmpty = /\s/g;
-                var emailReg = RegExp(/^[A-Za-z0-9._-]{3,15}+@[A-Za-z0-9._-]+\.[A-Za-z]{2,4}$/i);
-
-                if (url == '' || url.length == 0) {
-                    //alert('test');
-                    $('.box_inner_email').css('color', 'tomato')
-                                         .css('display', 'block')
-                                         .text("필수입력 정보입니다.");
-                    return false;
-                } else if (url.match(regEmpty)) {
-                	$('.box_inner_email').css('color', 'tomato')
-				 	 					 .css('display', 'block')
-					 					 .text("올바른 이메일을 입력해주세요.");
-					return false;
-				} else if (url != "" || url.length != 0) {
-					
-					var fullMail = email+"@"+url;
-					
-					if (!emailReg.test(fullMail)) {
-						$('.box_inner_email').css('color', 'tomato')
-	 					 					 .css('display', 'block')
-	 					 					 .text("올바른 이메일을 입력해주세요.");
-						return false;
-					} else {
-						$('.box_inner_email').css('display', 'none');
-					}
-				}
-            });
-
-            $('#sign_email_select').change(function() {
-                var eUrl = $(this).val();
-
-                if (eUrl == 'directVal') {
-                    $('#sign_email_url').val('');
-                    $('#sign_email_url').focus();
-                    $('#sign_email_url').removeAttr('readonly');
-                } else {
-                    $('#sign_email_url').val(eUrl);
-                    $('#sign_email_url').prop('readonly', true);
-                    $('#sign_email_id').blur();
-                }
-            });
-            
-            
-            // 우편번호, 주소 클릭시 다음주소API 창 출력
-            $('.addrbtn').click(function(){
-            	var zipcode = $('.addrbtn').eq(0).val();
-            	var addr = $('.addrbtn').eq(1).val();
-            	// alert(zipcode + ', ' + addr);
-            	
-            	if(zipcode == '' || addr == '') {
-            		$('#sample4_postcode2').click();
-            	}
-            });
-            
-            
-            
-            $('#sample6_detailAddress').blur(function(){
-            	var daddr = $(this).val();
-            	
-            	if(daddr == "" || daddr.length == 0) {
-            		$("#box_inner_address").css('color', 'tomato')
- 					 					.css('display', 'block')
-	 					 				.text("필수입력 정보입니다.");
-				return false;
-            	}
-            });
+                });
+            }
         });
     </script>
     <%@ include file="../include/footer.jsp" %>	
