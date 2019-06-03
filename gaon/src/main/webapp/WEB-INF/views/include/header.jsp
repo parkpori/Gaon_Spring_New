@@ -10,8 +10,8 @@
 <head>
 <meta charset="UTF-8">
 <!-- ${path}: el태그 -->
-<link rel="stylesheet" href="${path}/css/common.css?v=1">
-<link rel="stylesheet" href="${path}/css/header.css?v=1">
+<link rel="stylesheet" href="resources/css/common.css?v=1">
+<link rel="stylesheet" href="resources/css/header.css?v=1">
 <title>Insert title here</title>
 </head>
 <body>
@@ -21,7 +21,7 @@
             <a id="modal_all_close">
                 <i class="fas fa-times-circle"></i>
             </a>
-            <img src="${path}/img/logo.png" alt="로고이미지">
+            <img src="resources/img/logo.png" alt="로고이미지">
             <div>
                 <input type="text" id="login_id" placeholder="이메일 입력">
                 <input type="password" id="login_pw" placeholder="패스워드 입력">
@@ -118,7 +118,7 @@
 	        </div>
 	        <a href="index.gaon">
 	            <span class="header_title_logo">
-	                <img src="${path}/img/logo.png" alt="로고이미지">
+	                <img src="resources/img/logo.png" alt="로고이미지">
 	            </span>
             </a>
             <div class="header_div">

@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="${path}/css/common.css?v=1">
+<link rel="stylesheet" href="resources/css/common.css?v=1">
 <title>Insert title here</title>
 <style type="text/css">
 /* main part */
@@ -174,13 +174,13 @@
                     
                     <div class="carousel-inner">
                         <div class="item active">
-                            <img src="${path}/img/gaon_img-01.png" alt="First Slide">
+                            <img src="resources/img/gaon_img-01.png" alt="First Slide">
                         </div>
                         <div class="item">
-                            <img src="${path}/img/gaon_img-02.png" alt="Second Slide">
+                            <img src="resources/img/gaon_img-02.png" alt="Second Slide">
                         </div>
                         <div class="item">
-                            <img src="${path}/img/gaon_img-03.png" alt="Third Slide">
+                            <img src="resources/img/gaon_img-03.png" alt="Third Slide">
                         </div>
                     </div>
                 </div>
@@ -194,13 +194,13 @@
         </div>
         <div id="header_text1">BEST</div>
         <div class="main_best">
-        <c:forEach items="${bestList}" var="best">
+        <c:forEach items="${pLists.bList}" var="best">
             <div class="best_div">
                 <a><i class="fas fa-heart heart"></i></a>
                 <div class="back_color"></div>
                 <div class="front_color"></div>
                 <a href="detail.gaon?p_code=${best.p_code}">
-                	<img src="${path}/img/${best.p_img}" class="img_hover">
+                	<img src="resources/img/${best.p_img}" class="img_hover">
                 	<div>
                     	<span>${best.p_name}</span>
                 	</div>
@@ -215,12 +215,12 @@
 
         <div id="header_text2">NEW</div>
         <div class="main_new">
-        <c:forEach items="${newList}" var="new_DTO">
+        <c:forEach items="${pLists.nList}" var="new_DTO">
             <div class="new_div">
             	<a><i class="fas fa-heart heart"></i></a>
                 <div class="back_color"></div>
                 <a>
-	                <img src="${path}/img/${new_DTO.p_img}" class="img_hover">
+	                <img src="resources/img/${new_DTO.p_img}" class="img_hover">
 	                <div>
 	                    <span>${new_DTO.p_name}</span>
 	                </div>
