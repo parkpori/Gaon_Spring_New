@@ -266,19 +266,19 @@
     </style>
 </head>
 <body>
-	<form action="memberPlay.gaon" method="POST" name="frm_mem" id="frm_mem">
+	<form action="${path}/member/create" method="POST" name="frm_mem" id="frm_mem">
 	    <div class="main_div">
 	        <div id="sign_title">회원가입</div>
 	        <div class="sign">
 	            <div class="sign_index">필수항목</div>
 	            <div class="id_flex">
-	                <input type="text" class="sign_box" id="sign_id" placeholder="아이디" name="sign_id">
+	                <input type="text" class="sign_box" id="sign_id" placeholder="아이디" name="id">
 	                <span class="box_inner" id="box_inner_id">
 	                    3~15자의 영문/숫자 또는 ,_를 조합하여 입력
 	                </span>
 	            </div>
 	            <div>
-	                <input type="password" class="sign_box" id="sign_pw1" placeholder="비밀번호" name="sign_pw1">
+	                <input type="password" class="sign_box" id="sign_pw1" placeholder="비밀번호" name="pw">
 	                <span class="box_inner" id="box_inner_pw1">
 	                    5~16자의 영문/숫자를 조합하여 입력
 	                </span>
@@ -290,17 +290,17 @@
 	                </span>
 	            </div>
 	            <div>
-	                <input type="text" class="sign_box" id="sign_name" placeholder="성명" name="sign_name">
+	                <input type="text" class="sign_box" id="sign_name" placeholder="성명" name="name">
 	                <span class="box_inner" id="box_inner_name">
 	                    표준 한글 2~8자까지 가능합니다.
 	                </span>
 	            </div>
 	            <div class="sign_phone">
-	                <input type="text" id="sign_phone_1" placeholder="휴대폰" name="sign_phone_1">
+	                <input type="text" id="sign_phone_1" placeholder="휴대폰" name="phone1">
 	                <span></span>
-	                <input type="text" id="sign_phone_2" name="sign_phone_2">
+	                <input type="text" id="sign_phone_2" name="phone2">
 	                <span></span>
-	                <input type="text" id="sign_phone_3" name="sign_phone_3">
+	                <input type="text" id="sign_phone_3" name="phone3">
 	            </div>
 	            <div class="ckposition">
 	                <input type="checkbox" id="sign_ckmessage">
@@ -321,6 +321,7 @@
 	                        <option value="nate.com">nate.com</option>
 	                        <option value="directVal" selected="selected">직접입력</option>
 	                    </select>
+	                    <input type="hidden" id="email" name="email">
 	                </div>
 	                <div class="ckposition">
 	                    <input type="checkbox" id="sign_ckemail">
@@ -331,18 +332,18 @@
 	                </div>
 	            </div>
 	            <div class="sign_address">
-	            	<input type="text" id="sample6_postcode" placeholder="우편번호" class="addrbtn" readonly="readonly" name="sample6_postcode">
+	            	<input type="text" id="sample6_postcode" placeholder="우편번호" class="addrbtn" readonly="readonly" name="zipcode">
 		<input type="button" onclick="sample6_execDaumPostcode()" id="sample4_postcode2" value="우편번호 찾기"><br>
-		<input type="text" class="address_detail addrbtn" id="sample6_address" placeholder="주소" readonly="readonly" name="sample6_address">
-		<input type="text" class="address_detail" id="sample6_detailAddress" placeholder="상세주소" name="sample6_detailAddress">
+		<input type="text" class="address_detail addrbtn" id="sample6_address" placeholder="주소" readonly="readonly" name="addr1">
+		<input type="text" class="address_detail" id="sample6_detailAddress" placeholder="상세주소" name="addr2">
 	            </div>
 	            <div id="box_inner_address">필수입력 정보입니다.</div>
 	            <div class="sign_index" id="sign_index2">선택항목</div>
 	            
 	            <div class="sign_stitle" id="sign_year">생년월일</div>
 	            <div class="sign_birth">
-	                <input type="text" class="sign_year_day"  id="yy" placeholder="년(4자)" name="yy">
-	                <select class="sign_year_day" name="mm">
+	                <input type="text" class="sign_year_day"  id="yy" placeholder="년(4자)" name="birth_year">
+	                <select class="sign_year_day" name="birth_month">
 	                    <option>월</option>
 	                    <option value="1">1</option>
 	                    <option value="2">2</option>
@@ -357,7 +358,7 @@
 	                    <option value="11">11</option>
 	                    <option value="12">12</option>
 	                </select>
-	                <input type="text" class="sign_year_day" id="dd" placeholder="일" name="dd">
+	                <input type="text" class="sign_year_day" id="dd" placeholder="일" name="birth_day">
 	            </div>
 	            <div id="sign_birth_text">등록된 생일에 생일 축하 쿠폰을 선물로 드립니다.(연1회)</div>
 	            <div id="sign_finish">
@@ -377,13 +378,14 @@
         	});
             
             $('#btn_agree').click(function(){
-            	alert("??");
             	test();
-            	if (test() == true) {
-            		alert("!!");
-            		location.href = "${path}/";
-            		$("#frm_mem").submit();
-				}
+            	// email을 합치고 input(hidden)에 담아야 전송됨
+            	var email_id = $("#sign_email_id").val();
+            	var email_url = $("#sign_email_url").val();
+            	var email = email_id + "@" + email_url;
+            	$("#email").val(email);
+            	
+            	$("#frm_mem").submit();
         	});
             
             function test(){

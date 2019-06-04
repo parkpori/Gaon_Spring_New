@@ -66,7 +66,7 @@
                     <ul><!-- empty: 비어있으면 when을 타고 아니면 otherwise를 타라 -->
                     	<!-- when: if / otherwise: else -->
 	                    <c:choose>
-		                    <c:when test="${empty sessionScope.loginUser}">
+		                    <c:when test="${empty sessionScope.name}">
 		                        <li><a class="loginmenu" id="login_open">로그인</a>
 		                        </li>
 		                        <li><a href="${path}/member/constract" class="loginmenu" id="join_open">회원가입</a>
@@ -76,8 +76,8 @@
 	                        </c:when>
 	                        <c:otherwise>
 		                        <li id="loginInfo">
-		                        	<span id="login_name"><span>${sessionScope.loginUser.name}</span>
-		                        	(${sessionScope.loginUser.id})
+		                        	<span id="login_name"><span>${sessionScope.name}</span>
+		                        	(${sessionScope.userid})
 		                        	</span>
 		                        	<!-- <span class="login_bar"></span> -->
 		                        </li>
@@ -98,12 +98,12 @@
 	                            <a class="loginmenu_list">주문조회</a>
 	                            <a class="loginmenu_list">장바구니</a>
 	                            <a class="loginmenu_list">위시리스트</a>
-	                            
+	                            <a href="${path}/member/update" class="loginmenu_list">내 정보 수정</a>
 	                            <c:choose>
-		                            <c:when test="${!empty sessionScope.loginUser}">
-			                            <a href="${path}/pwUpdate.gaon" class="loginmenu_list">비밀번호 수정</a>
-			                            <a href="${path}/infoUpdate.gaon" class="loginmenu_list">내 정보 수정</a>
-			                            <a href="${path}/dropMember.gaon" class="loginmenu_list">회원 탈퇴</a>
+		                            <c:when test="${!empty sessionScope.name}">
+			                            <a href="${path}/member/" class="loginmenu_list">비밀번호 수정</a>
+			                            
+			                            <a href="${path}/member/" class="loginmenu_list">회원 탈퇴</a>
 		                            </c:when>
 		                    	</c:choose>
 		                    	<a class="loginmenu_list">고객센터</a>
@@ -239,14 +239,14 @@
             	
             	
             	$.ajax({
-            		url: "login.gaon",
+            		url: "${path}/member/login",
             		type: "POST",
-            		dataType: "json",
+            		dataType: "text", /* return의 데이터타입 */
             		data: "id="+id+"&pw="+pw,
             		success: function(data){
-            			if (data.message == "1") {
+            			if (data == "1") {
 							location.reload();
-						} else if (data.message = "-1") {
+						} else if (data = "-1") {
 							$('#login_id').focus();
 							$('.login_box_inner').text("아이디 또는 비밀번호가 일치하지 않습니다.")
 											.css("display", "block");
@@ -312,10 +312,9 @@
 		$(document).on("click", ".logout_btn", function(){
 			
         	$.ajax({
-        		url: "logoutAjax.gaon",
+        		url: "${path}/member/logout",
         		type: "POST",
-        		dataType: "json",
-        		success: function(data){
+        		success: function(){
         			location.reload();
         		},
         		error:function(){

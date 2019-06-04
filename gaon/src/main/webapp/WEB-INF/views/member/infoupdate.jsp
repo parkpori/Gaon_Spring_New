@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="resources/css/common.css?v=1">
+<link rel="stylesheet" href="${path}/resources/css/common.css?v=1">
 <title>Insert title here</title>
 	<style type="text/css">
 		.main_div {
@@ -96,7 +96,7 @@
             margin: 8px 15px 0 0;
         }
         #update_ckmessage_text {
-            background: url('img/check_off.gif') no-repeat;
+            background: url('${path}/resources/img/check_off.gif') no-repeat;
             height: 25px;
             margin: 8px 0 10px 0;
         }
@@ -108,7 +108,7 @@
             line-height: 25px;
         }
         #update_ckmessage:checked +#update_ckmessage_text {
-            background: url('img/check_on.gif') no-repeat;
+            background: url('${path}/resources/img/check_on.gif') no-repeat;
         }
         #update_ckmessage:checked +#update_ckmessage_text>span {
             color: #444;
@@ -146,7 +146,7 @@
             margin: 8px 15px 0 0;
         }
         #update_ckemail_text {
-            background: url('img/check_off.gif') no-repeat;
+            background: url('${path}/resources/img/check_off.gif') no-repeat;
             height: 25px;
             margin: 8px 0 10px 0;
         }
@@ -159,7 +159,7 @@
         }
 
         #update_ckemail:checked +#update_ckemail_text {
-            background: url('img/check_on.gif') no-repeat;
+            background: url('${path}/resources/img/check_on.gif') no-repeat;
         }
         #update_ckemail:checked +#update_ckemail_text>span {
             color: #444;
@@ -277,20 +277,20 @@
 	        <div class="update">
 	            <div class="update_index">필수항목</div>
 	            <div class="id_flex">
-	                <input type="text" class="update_box" id="update_id" name="update_id" readonly="readonly" value="${sessionScope.loginUser.id}">
+	                <input type="text" class="update_box" id="update_id" name="update_id" readonly="readonly" value="${one.id}">
 	            </div>
 	            <div>
-	                <input type="text" class="update_box" id="update_name" placeholder="성명" name="update_name" value="${sessionScope.loginUser.name}">
+	                <input type="text" class="update_box" id="update_name" placeholder="성명" name="update_name" value="${one.name}">
 	                <span class="box_inner" id="box_inner_name">
 	                    표준 한글 2~8자까지 가능합니다.
 	                </span>
 	            </div>
 	            <div class="update_phone">
-	                <input type="text" id="update_phone_1" placeholder="휴대폰" name="update_phone_1" value="${sessionScope.loginUser.phone1}">
+	                <input type="text" id="update_phone_1" placeholder="휴대폰" name="update_phone_1" value="${one.phone1}">
 	                <span></span>
-	                <input type="text" id="update_phone_2" name="update_phone_2" value="${sessionScope.loginUser.phone2}">
+	                <input type="text" id="update_phone_2" name="update_phone_2" value="${one.phone2}">
 	                <span></span>
-	                <input type="text" id="update_phone_3" name="update_phone_3" value="${sessionScope.loginUser.phone3}">
+	                <input type="text" id="update_phone_3" name="update_phone_3" value="${one.phone3}">
 	            </div>
 	            <div class="ckposition">
 	                <input type="checkbox" id="update_ckmessage">
@@ -321,17 +321,17 @@
 	                </div>
 	            </div>
 	            <div class="update_address">
-	            	<input type="text" id="sample6_postcode" placeholder="우편번호" class="addrbtn" readonly="readonly" name="sample6_postcode" value="${sessionScope.loginUser.zipcode}">
+	            	<input type="text" id="sample6_postcode" placeholder="우편번호" class="addrbtn" readonly="readonly" name="sample6_postcode" value="${one.zipcode}">
 		<input type="button" onclick="sample6_execDaumPostcode()" id="sample4_postcode2" value="우편번호 찾기"><br>
-		<input type="text" class="address_detail addrbtn" id="sample6_address" placeholder="주소" readonly="readonly" name="sample6_address" value="${sessionScope.loginUser.addr1}">
-		<input type="text" class="address_detail" id="sample6_detailAddress" placeholder="상세주소" name="sample6_detailAddress" value="${sessionScope.loginUser.addr2}">
+		<input type="text" class="address_detail addrbtn" id="sample6_address" placeholder="주소" readonly="readonly" name="sample6_address" value="${one.addr1}">
+		<input type="text" class="address_detail" id="sample6_detailAddress" placeholder="상세주소" name="sample6_detailAddress" value="${one.addr2}">
 	            </div>
 	            <div id="box_inner_address">필수입력 정보입니다.</div>
 	            <div class="update_index" id="update_index2">선택항목</div>
 	            
 	            <div class="update_stitle" id="update_year">생년월일</div>
 	            <div class="update_birth">
-	                <input type="text" class="update_year_day"  id="yy" placeholder="년(4자)" name="yy" value="${sessionScope.loginUser.birth_year}">
+	                <input type="text" class="update_year_day"  id="yy" placeholder="년(4자)" name="yy" value="${one.birth_year}">
 	                <select class="update_year_day" name="mm" id="mm">
 	                    <option>월</option>
 	                    <option value="1">1</option>
@@ -347,7 +347,7 @@
 	                    <option value="11">11</option>
 	                    <option value="12">12</option>
 	                </select>
-	                <input type="text" class="update_year_day" id="dd" placeholder="일" name="dd" value="${sessionScope.loginUser.birth_day}">
+	                <input type="text" class="update_year_day" id="dd" placeholder="일" name="dd" value="${one.birth_day}">
 	            </div>
 	            <div id="update_birth_text">등록된 생일에 생일 축하 쿠폰을 선물로 드립니다.(연1회)</div>
 	            <div id="update_finish">
@@ -357,7 +357,7 @@
 	        </div>
 	    </div>
 	</form>
-    <script type="text/javascript" src="js/validation.js"></script>
+    <script type="text/javascript" src="${path}/resources/js/validation.js"></script>
     <script type="text/javascript">
         
         $(document).ready(function() {
@@ -492,7 +492,7 @@
 			
 			
 			// 합쳐진 email 쪼개는 법
-			var email = "${sessionScope.loginUser.email}";
+			var email = "${one.email}";
 			// indexOf();: 기준
 			var index = email.indexOf('@');
 			// 0번째 부터 index까지
@@ -612,7 +612,7 @@
             
             
             // select로 만든 month 값을 불러오는 법
-            var val = "${sessionScope.loginUser.birth_month}";
+            var val = "${one.birth_month}";
             // alert(val);
             $("#mm").val(val).prop("selected", true);
             
