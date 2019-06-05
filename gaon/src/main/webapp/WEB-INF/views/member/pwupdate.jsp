@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="resources/css/common.css?v=1">
+<link rel="stylesheet" href="${path}/resources/css/common.css?v=1">
 <title>Insert title here</title>
 	<style type="text/css">
 		.main_div {
@@ -102,9 +102,9 @@
     </style>
 </head>
 <body>  
-   	<form action="pwUpdatePlay.gaon" method="POST" name="frm_mem" id="frm_mem">
+   	<form action="${path}/member/pwupdate" method="POST" name="frm_mem" id="frm_mem">
    		<!-- id값을 입력받지 않기 때문에 id값을 알기위해 session의 id값을 가져오는 방법 -->
-   		<input type="hidden" name="id" value="${sessionScope.loginUser.id}">
+   		<input type="hidden" name="id" value="${sessionScope.userid}">
         <div class="main_div">
             <div id="update_title">비밀번호 수정</div>
             <div class="update">
@@ -117,7 +117,7 @@
                 </div>
                 <div class="update_index index_btm">새 비밀번호 입력</div>
 				<div>
-                    <input type="password" class="update_box" id="update_pw1" placeholder="새 비밀번호" name="update_pw1">
+                    <input type="password" class="update_box" id="update_pw1" placeholder="새 비밀번호" name="pw">
                     <span class="box_inner" id="box_inner_pw1">
                         5~16자의 영문/숫자를 조합하여 입력
                     </span>
@@ -135,7 +135,7 @@
             </div>
         </div>
     </form>
-    <script type="text/javascript" src="js/validation.js"></script>
+    <script type="text/javascript" src="${path}/resources/js/validation.js"></script>
     <script type="text/javascript">
         
         $(document).ready(function() {
@@ -145,13 +145,13 @@
         	
         	
         	$("#btn_default").click(function(){
-	        	location.href = "index.gaon";
+	        	location.href = "${path}/";
 	        });
             
             
             $('#update_pw3').blur(function() {
 				var nowPw = $('#update_pw3').val();
-				var nowId = "${sessionScope.loginUser.id}";
+				var nowId = "${sessionScope.userid}";
                 
 				if (nowPw != null || nowPw.length != 0) {
 					currentPw = ajaxPwCheck(nowId, nowPw);

@@ -31,6 +31,30 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
+	public void updateMember(MemberDTO mDto, HttpSession session) {
+		// 비즈니스로직
+		// 1) 회원정보 수정
+		int result = mDao.updateMember(mDto);
+		// 2) 회원정보 수정 성공하면 session의 name값을 수정한 이름으로 변경
+		if (result > 0) {
+			session.removeAttribute("name");
+			session.setAttribute("name", mDto.getName());
+		}
+	}
+
+	@Override
+	public void delete(HttpSession session) {
+		// 비즈니스로직
+		// 1) 회원삭제! -> ID필요 -> session
+		// 2) 삭제 성공시 세션값 초기화
+		String id = (String)session.getAttribute("userid");
+		int result = mDao.delete(id);
+		if (result > 0) {
+			session.invalidate(); // 세션초기화
+		}
+	}
+
+	@Override
 	public boolean login(MemberDTO mDto, HttpSession session) {
 		// 비즈니스로직
 		// 1) DB에 ID와 PW가 매칭되는지 Check
@@ -64,4 +88,22 @@ public class MemberServiceImpl implements MemberService {
 		return mDto;
 	}
 
+	@Override
+	public String pwCheck(MemberDTO mDto) {
+		// DB에서 가져온 현재 비밀번호와 사용자가 입력한 비밀번호가 같은지 체크
+		// 같으면 1, 틀리면 -1을 view단으로 전송
+		String name = mDao.login(mDto);
+		String result = "-1";
+		if (name != null) {
+			result = "1";
+		}
+		return result;
+	}
+
+	@Override
+	public void pwUpdate(MemberDTO mDto) {
+		// DB에 있는 비밀번호를 수정
+		mDao.pwUpdate(mDto);
+	}
+	
 }

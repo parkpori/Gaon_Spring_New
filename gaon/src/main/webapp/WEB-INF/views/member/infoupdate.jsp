@@ -271,26 +271,26 @@
     </style>
 </head>
 <body>  
-	<form action="infoUpdatePlay.gaon" method="POST" name="frm_mem" id="frm_mem">
+	<form action="${path}/member/update" method="POST" name="frm_mem" id="frm_mem">
 	    <div class="main_div">
 	        <div id="update_title">내 정보 수정</div>
 	        <div class="update">
 	            <div class="update_index">필수항목</div>
 	            <div class="id_flex">
-	                <input type="text" class="update_box" id="update_id" name="update_id" readonly="readonly" value="${one.id}">
+	                <input type="text" class="update_box" id="update_id" name="id" readonly="readonly" value="${one.id}">
 	            </div>
 	            <div>
-	                <input type="text" class="update_box" id="update_name" placeholder="성명" name="update_name" value="${one.name}">
+	                <input type="text" class="update_box" id="update_name" placeholder="성명" name="name" value="${one.name}">
 	                <span class="box_inner" id="box_inner_name">
 	                    표준 한글 2~8자까지 가능합니다.
 	                </span>
 	            </div>
 	            <div class="update_phone">
-	                <input type="text" id="update_phone_1" placeholder="휴대폰" name="update_phone_1" value="${one.phone1}">
+	                <input type="text" id="update_phone_1" placeholder="휴대폰" name="phone1" value="${one.phone1}">
 	                <span></span>
-	                <input type="text" id="update_phone_2" name="update_phone_2" value="${one.phone2}">
+	                <input type="text" id="update_phone_2" name="phone2" value="${one.phone2}">
 	                <span></span>
-	                <input type="text" id="update_phone_3" name="update_phone_3" value="${one.phone3}">
+	                <input type="text" id="update_phone_3" name="phone3" value="${one.phone3}">
 	            </div>
 	            <div class="ckposition">
 	                <input type="checkbox" id="update_ckmessage">
@@ -311,6 +311,7 @@
 	                        <option value="nate.com">nate.com</option>
 	                        <option value="directVal" selected="selected">직접입력</option>
 	                    </select>
+	                    <input type="hidden" id="email" name="email">
 	                </div>
 	                <div class="ckposition">
 	                    <input type="checkbox" id="update_ckemail">
@@ -321,18 +322,18 @@
 	                </div>
 	            </div>
 	            <div class="update_address">
-	            	<input type="text" id="sample6_postcode" placeholder="우편번호" class="addrbtn" readonly="readonly" name="sample6_postcode" value="${one.zipcode}">
+	            	<input type="text" id="sample6_postcode" placeholder="우편번호" class="addrbtn" readonly="readonly" name="zipcode" value="${one.zipcode}">
 		<input type="button" onclick="sample6_execDaumPostcode()" id="sample4_postcode2" value="우편번호 찾기"><br>
-		<input type="text" class="address_detail addrbtn" id="sample6_address" placeholder="주소" readonly="readonly" name="sample6_address" value="${one.addr1}">
-		<input type="text" class="address_detail" id="sample6_detailAddress" placeholder="상세주소" name="sample6_detailAddress" value="${one.addr2}">
+		<input type="text" class="address_detail addrbtn" id="sample6_address" placeholder="주소" readonly="readonly" name="addr1" value="${one.addr1}">
+		<input type="text" class="address_detail" id="sample6_detailAddress" placeholder="상세주소" name="addr2" value="${one.addr2}">
 	            </div>
 	            <div id="box_inner_address">필수입력 정보입니다.</div>
 	            <div class="update_index" id="update_index2">선택항목</div>
 	            
 	            <div class="update_stitle" id="update_year">생년월일</div>
 	            <div class="update_birth">
-	                <input type="text" class="update_year_day"  id="yy" placeholder="년(4자)" name="yy" value="${one.birth_year}">
-	                <select class="update_year_day" name="mm" id="mm">
+	                <input type="text" class="update_year_day"  id="yy" placeholder="년(4자)" name="birth_year" value="${one.birth_year}">
+	                <select class="update_year_day" name="birth_month" id="mm">
 	                    <option>월</option>
 	                    <option value="1">1</option>
 	                    <option value="2">2</option>
@@ -347,7 +348,7 @@
 	                    <option value="11">11</option>
 	                    <option value="12">12</option>
 	                </select>
-	                <input type="text" class="update_year_day" id="dd" placeholder="일" name="dd" value="${one.birth_day}">
+	                <input type="text" class="update_year_day" id="dd" placeholder="일" name="birth_day" value="${one.birth_day}">
 	            </div>
 	            <div id="update_birth_text">등록된 생일에 생일 축하 쿠폰을 선물로 드립니다.(연1회)</div>
 	            <div id="update_finish">
@@ -363,7 +364,7 @@
         $(document).ready(function() {
         	
         	$("#btn_default").click(function(){
-	        	location.href = "index.gaon";
+	        	location.href = "${path}/";
 	        });
         	
 
@@ -371,6 +372,16 @@
             var yyReg = RegExp(/^[0-9]{4}$/);
             var ddReg = RegExp(/^[0-9]{1,2}$/);
 
+        	$("#btn_agree").click(function(){
+        		
+        		var email_id = $("#update_email_id").val();
+        		var email_url = $("#update_email_url").val();
+        		var email = email_id + "@" + email_url;
+        		$("#email").val(email);
+        		
+	        	// 유효성 체크하는 값을 받아온다.
+	        	$("#frm_mem").submit();
+	        });
             
             $('#update_name').blur(function() {
 				
@@ -597,8 +608,7 @@
             	}
             });
             
-            
-            
+
             $('#sample6_detailAddress').blur(function(){
             	var daddr = $(this).val();
             	
@@ -607,6 +617,9 @@
  					 					.css('display', 'block')
 	 					 				.text("필수입력 정보입니다.");
 				return false;
+            	} else {
+            		$("#box_inner_address").css('display', 'none');
+            	return true;
             	}
             });
             
@@ -615,15 +628,6 @@
             var val = "${one.birth_month}";
             // alert(val);
             $("#mm").val(val).prop("selected", true);
-            
-            
-            
-        	
-        	$("#btn_agree").click(function(){
-	        	// 유효성 체크하는 값을 받아온다.
-	        	$("#frm_mem").submit();
-	        });
-            
             
         });
     </script>

@@ -97,15 +97,15 @@
 			margin: 0;
 		}
 		.constract_btn {
-			height: 60px;
+			height: 55px;
 			display: flex;
 			justify-content: center;
 			align-items: center;
-			margin: 50px 0;
+			margin: 50px 0 35px;
 		}
 		.constract_btn > a > span {
 			text-align: center;
-			line-height: 60px;
+			line-height: 55px;
 			font-family: 'Noto Serif KR', serif;
             font-size: 17px;
             color: white;

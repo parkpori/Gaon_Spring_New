@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="resources/css/common.css?v=1">
+<link rel="stylesheet" href="${path}/resources/css/common.css?v=1">
 <title>Insert title here</title>
 	<style type="text/css">
 		.main_div {
@@ -240,7 +240,7 @@
         <div class="drop">
          <div class="drop_box">
          	<div class="drop_box_text1">
-         		<span>"${sessionScope.loginUser.name}"</span>님의 회원탈퇴 시 아래의 조치가 취해집니다.
+         		<span>"${sessionScope.name}"</span>님의 회원탈퇴 시 아래의 조치가 취해집니다.
          	</div>
          	<div class="drop_box_text2">
          		<div class="box_text">
@@ -282,19 +282,19 @@
         </div>
 	</div>
     <%@ include file="../include/footer.jsp" %>
-    <script type="text/javascript" src="js/validation.js"></script>
+    <script type="text/javascript" src="${path}/resources/js/validation.js"></script>
     <script type="text/javascript">
     
 	    $(function() {
 			
 	    	$("#btn_default").click(function(){
-	        	location.href = "index.gaon";
+	        	location.href = "${path}/";
 	        });
 	        
 	        var state = false;
 	        
 	        $("#drop_pw1").blur(function(){
-	        	var nowId = "${sessionScope.loginUser.id}";
+	        	var nowId = "${sessionScope.userid}";
 	        	var nowPw = $(this).val();
 	        	
 	        	state = ajaxPwCheck(nowId, nowPw);
@@ -315,14 +315,8 @@
 	        
 	        
 	        
-	        $("#modal_agree").click(function(){
-	        	
-	        	// 1. input태그에서 id값 불러오는 것과 같음
-	        	/* var id = "${sessionScope.loginUser.id}";
-	        	location.href="dropMember.gaon?id=" + id; */
-	        	
-	        	// 2. 새로운 방법(id값 찾아오는 법)
-	        	location.href="dropMemberPlay.gaon";
+	        $("#modal_agree").click(function(){	        	
+	        	location.href="${path}/member/deletePlay";
 	        });
 	    });
     </script>

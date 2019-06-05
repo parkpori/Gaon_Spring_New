@@ -98,12 +98,11 @@
 	                            <a class="loginmenu_list">주문조회</a>
 	                            <a class="loginmenu_list">장바구니</a>
 	                            <a class="loginmenu_list">위시리스트</a>
-	                            <a href="${path}/member/update" class="loginmenu_list">내 정보 수정</a>
 	                            <c:choose>
 		                            <c:when test="${!empty sessionScope.name}">
-			                            <a href="${path}/member/" class="loginmenu_list">비밀번호 수정</a>
-			                            
-			                            <a href="${path}/member/" class="loginmenu_list">회원 탈퇴</a>
+		                            	<a href="${path}/member/update" class="loginmenu_list">내 정보 수정</a>
+			                            <a href="${path}/member/pwupdate" class="loginmenu_list">비밀번호 수정</a>
+			                            <a href="${path}/member/delete" class="loginmenu_list">회원 탈퇴</a>
 		                            </c:when>
 		                    	</c:choose>
 		                    	<a class="loginmenu_list">고객센터</a>
