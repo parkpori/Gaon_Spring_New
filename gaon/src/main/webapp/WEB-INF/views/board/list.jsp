@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="${path}/css/common.css?v=1">
+<link rel="stylesheet" href="${path}/resources/css/common.css?v=1">
 <title>Insert title here</title>
 <style type="text/css">
 	.board_div {
@@ -305,17 +305,17 @@
         <div id="all_title">질문 게시판</div>
         <div class="board_all">
         	<div class="board_index">
-	        	<a href="${path}/boardList.gaon?sort_type=new&search_option=${search_option}&keyword=${keyword}" id="ordernew">최신순</a>
-	        	<a href="${path}/boardList.gaon?sort_type=good&search_option=${search_option}&keyword=${keyword}" id="ordergood">추천순</a>
-	        	<a href="${path}/boardList.gaon?sort_type=reply&search_option=${search_option}&keyword=${keyword}" id="orderreply">댓글순</a>
-	        	<a href="${path}/boardList.gaon?sort_type=view&search_option=${search_option}&keyword=${keyword}" id="orderview">조회순</a>
+	        	<a href="${path}/board/list?sort_option=new&search_option=${map.search_option}&keyword=${map.keyword}" id="ordernew">최신순</a>
+	        	<a href="${path}/board/list?sort_option=good&search_option=${map.search_option}&keyword=${map.keyword}" id="ordergood">추천순</a>
+	        	<a href="${path}/board/list?sort_option=reply&search_option=${map.search_option}&keyword=${map.keyword}" id="orderreply">댓글순</a>
+	        	<a href="${path}/board/list?sort_option=view&search_option=${map.search_option}&keyword=${map.keyword}" id="orderview">조회순</a>
         	</div>
         	<div class="search_div">
         		<select class="search_select" name="selsearch">
-        			<option value="1">제목</option>
-        			<option value="2">내용</option>
-        			<option value="3" selected="selected">제목+내용</option>
-        			<option value="4">작성자</option>
+        			<option value="title">제목</option>
+        			<option value="content">내용</option>
+        			<option value="all" selected="selected">제목+내용</option>
+        			<option value="writer">작성자</option>
         		</select>
         		<span class="input_group">
         			<input type="text" name="" class="search_input">
@@ -332,7 +332,7 @@
         			<th>조회수</th>
         			<th>첨부</th>
         		</tr>
-        		<c:forEach items="${list}" var="bDto">
+        		<c:forEach items="${map.list}" var="bDto">
         			<!-- 현재시간 구하기 -->
         			<jsp:useBean id="now" class="java.util.Date"/>
         			<fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="today"/>
@@ -373,35 +373,35 @@
 	        		</tr>
         		</c:forEach>
         	</table>
-        	<c:if test="${!empty keyword}">
+        	<c:if test="${!empty map.keyword}">
 	        	<div class="result_position">
 		        	<div id="search_result">
-		        		<span class="search_span">"${keyword}"</span>로 검색한 결과는 총 
-		        		<span class="search_span">"${totalCount}"</span>건 입니다.
+		        		<span class="search_span">"${map.keyword}"</span>로 검색한 결과는 총 
+		        		<span class="search_span">"${map.count}"</span>건 입니다.
 		        	</div>
 		        </div>
 	        </c:if>
         	<div class="board_btm">
 	        	<div class="board_navi">
 	        		<ul>
-	        			<c:if test="${pageMaker.prev}">
-		        			<li><a href="${path}/boardList.gaon?page=${pageMaker.startPage - 1}&sort_type=${sort_type}&search_option=${search_option}&keyword=${keyword}"><i class="fas fa-angle-left navi_icon"></i></a></li>
-		        			<li><a href="${path}/boardList.gaon?page=1&sort_type=${sort_type}&search_option=${search_option}&keyword=${keyword}">1</a></li>
+	        			<c:if test="${map.pager.curBlock > 1}">
+		        			<li><a href="${path}/board/list?curPage=${map.pager.blockBegin-10}&sort_option=${map.sort_option}&search_option=${map.search_option}&keyword=${map.keyword}"><i class="fas fa-angle-left navi_icon"></i></a></li>
+		        			<li><a href="${path}/board/list?curPage=1&sort_option=${map.sort_option}&search_option=${map.search_option}&keyword=${map.keyword}">1</a></li>
 		        			<li><a id="no_hover">...</a></li>
 	        			</c:if>
 	        			
-	        			<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
-					    	<li <c:out value="${pageMaker.criDto.page == idx?'id=active':''}"/>>
-					    		<a href="${path}/boardList.gaon?page=${idx}&sort_type=${sort_type}&search_option=${search_option}&keyword=${keyword}&key=${code}" class="navi_btn">
+	        			<c:forEach begin="${map.pager.blockBegin}" end="${map.pager.blockEnd}" var="idx">
+					    	<li <c:out value="${map.pager.curPage == idx?'id=active':''}"/>>
+					    		<a href="${path}/board/list?curPage=${idx}&sort_option=${map.sort_option}&search_option=${map.search_option}&keyword=${map.keyword}&key=${code}" class="navi_btn">
 					    			${idx}
 					    		</a>
 					    	</li>
 					    </c:forEach>
 					    
-					    <c:if test="${pageMaker.next}">
+					    <c:if test="${map.pager.curBlock < map.pager.totBlock}">
 						    <li><a id="no_hover">...</a></li>
-						    <li><a href="${path}/boardList.gaon?page=${pageMaker.finalPage}&sort_type=${sort_type}&search_option=${search_option}&keyword=${keyword}">${pageMaker.finalPage}</a></li>
-						    <li><a href="${path}/boardList.gaon?page=${pageMaker.endPage + 1}&sort_type=${sort_type}&search_option=${search_option}&keyword=${keyword}"><i class="fas fa-angle-right navi_icon"></i></a></li>
+						    <li><a href="${path}/board/list?curPage=${map.pager.totPage}&sort_option=${map.sort_option}&search_option=${map.search_option}&keyword=${map.keyword}">${map.pager.totPage}</a></li>
+						    <li><a href="${path}/board/list?curPage=${map.pager.blockEnd + 1}&sort_option=${map.sort_option}&search_option=${map.search_option}&keyword=${map.keyword}"><i class="fas fa-angle-right navi_icon"></i></a></li>
 					    </c:if>
 					</ul>
 	        	</div>
@@ -441,7 +441,7 @@
 			}); */
 			
 			
-			var sort_type = "${sort_type}";
+			var sort_type = "${map.sort_option}";
 			if (sort_type == "new") {
 				$("#ordernew").css("color", "#E65D6E");
 			} else if (sort_type == "good") {
@@ -489,7 +489,7 @@
 				$(".search_icon").css("color", "#E65D6E");
 				return false;
 			}
-			location.href="${path}/boardList.gaon?search_option="+search_option+"&keyword="+keyword;
+			location.href="${path}/board/list?search_option="+search_option+"&keyword="+keyword;
 		});
 	</script>
 	<%@ include file="../include/footer.jsp" %>	

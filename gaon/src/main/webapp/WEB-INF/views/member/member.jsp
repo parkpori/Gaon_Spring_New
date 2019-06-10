@@ -378,67 +378,137 @@
         	var email = email_id + "@" + email_url;
         	$("#email").val(email);
         	
-        	var return_val = false;
+        	var return_id = false;
+        	var return_pw = false;
+        	var return_name = false;
+        	var return_phone1 = false;
+        	var return_phone2 = false;
+        	var return_phone3 = false;
+        	var return_e_id = false;
+        	var return_url = false;
+        	var return_zipcode = false;
+        	var return_addr = false;
+        	
+        	var return_all = false;
         	
         	$('#btn_default').click(function(){
         		location.href = "${path}/";
         	});
             
             $('#btn_agree').click(function(){
-            	if (return_val == true) {
-					
+            	alert(return_all);
+            	
+            	if (!return_id) {
+					$("#sign_id").focus();
+					return_all = false;
+					return false;
 				}
-            	//$("#frm_mem").submit();
+            	if (!return_pw) {
+					$("#sign_pw1").focus();
+					return_all = false;
+					return false;
+				}
+            	if (!return_name) {
+					$("#sign_name").focus();
+					return_all = false;
+					return false;
+				}
+            	if (!return_phone1) {
+					$("#sign_phone_1").focus();
+					return_all = false;
+					return false;
+				}
+            	if (!return_phone2) {
+					$("#sign_phone_2").focus();
+					return_all = false;
+					return false;
+				}
+            	if (!return_phone3) {
+					$("#sign_phone_3").focus();
+					return_all = false;
+					return false;
+				}
+            	if (!return_e_id) {
+					$("#sign_email_id").focus();
+					return_all = false;
+					return false;
+				}
+            	if (!return_url) {
+					$("#sign_email_url").focus();
+					return_all = false;
+					return false;
+				}
+            	if (!return_zipcode) {
+					$("#sample6_detailAddress").focus();
+					return_all = false;
+					return false;
+				}
+            	if (!return_addr) {
+					$("#sample6_detailAddress").focus();
+					return_all = false;
+					return false;
+				}
+            	if (return_all) {
+            		$("#frm_mem").submit();
+				}
         	});
             
             $('#sign_id').blur(function() {
             	var id = $(this).val();
-            	return_val = idCheck(id);
-            	console.log(return_val);
+            	return_id = idCheck(id);
+            	console.log("return_id = "+return_id);
             });
         
 			$('#sign_pw1').blur(function() {
 				var pw = $('#sign_pw1').val();
 				var rpw = $('#sign_pw2').val();
-				var return_val = pwCheck(pw, rpw);
+				return_pw = pwCheck(pw, rpw);
+				console.log("return_pw1 = "+return_pw);
             });
             
             $('#sign_pw2').blur(function() {
             	var pw = $('#sign_pw1').val();
 				var rpw = $('#sign_pw2').val();
-				var return_val = rpwCheck(pw, rpw);
+				return_pw = rpwCheck(pw, rpw);
+				console.log("return_pw2 = "+return_pw);
             });
             
 			$('#sign_name').blur(function() {
                 var name = $.trim($(this).val());
-                var return_val = nameCheck(name);
+                return_name = nameCheck(name);
+                console.log("return_name = "+return_name);
             });
         
 			$("#sign_phone_1").blur(function() {
                 var phone = $.trim($(this).val());
-                var return_val = phone1Check(phone);
+                return_phone1 = phone1Check(phone);
+                console.log("return_phone1 = "+return_phone1);
             });
 			
 			$("#sign_phone_2").blur(function() {
                 var phone = $.trim($(this).val());
-                var return_val = phone2Check(phone);
+                return_phone2 = phone2Check(phone);
+                console.log("return_phone2 = "+return_phone2);
             });
 			
 			$("#sign_phone_3").blur(function() {
                 var phone = $.trim($(this).val());
-                var return_val = phone2Check(phone);
+                return_phone3 = phone2Check(phone);
+                console.log("return_phone3 = "+return_phone3);
             });
 			
 			$('#sign_email_id').blur(function() {
                 var email = $.trim($('#sign_email_id').val());
                 var url = $.trim($('#sign_email_url').val());
-                var return_val = emailCheck(email, url);
+                return_e_id = emailCheck(email, url);
+                console.log("return_e_id = "+return_e_id);
             });
 			
 			$('#sign_email_url').blur(function() {
                 var email = $.trim($('#sign_email_id').val());
                 var url = $.trim($('#sign_email_url').val());
-                var return_val = urlCheck(email, url);
+                return_url = urlCheck(email, url);
+                console.log("return_url = "+return_url);
             });
 
             $('#sign_email_select').change(function() {
@@ -463,7 +533,11 @@
             	
             	if(zipcode == '' || addr == '') {
             		$('#sample4_postcode2').click();
-            	}
+            		return_zipcode = false;
+            	} else {
+            		return_zipcode = true;
+				}
+            	console.log("return_zipcode = "+return_zipcode);
             });
             
             $('#sample6_detailAddress').blur(function(){
@@ -473,11 +547,12 @@
             		$("#box_inner_address").css('color', 'tomato')
  					 					.css('display', 'block')
 	 					 				.text("필수입력 정보입니다.");
-            		return_val = false;
+            		return_addr = false;
             	} else {
             		$("#box_inner_address").css('display', 'none');
-            		return_val = true;
+            		return_addr = true;
             	}
+            	console.log("return_addr = "+return_addr);
             });
         });
         

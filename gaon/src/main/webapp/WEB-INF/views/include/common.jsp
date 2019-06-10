@@ -14,7 +14,7 @@
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 
 <!-- favicon -->
-<link rel="icon" href="${path}/resources/img/logo.png" type="image/png">
+<link rel="icon" href="${path}/resources/img/pavicon.png" type="image/png">
 
 <!-- font awesome -->
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">

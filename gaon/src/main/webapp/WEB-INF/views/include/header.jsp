@@ -182,7 +182,7 @@
                         <a>세트</a>
                     </li>
                     <li class="dropdownlist">
-                        <a href="${path}/boardList.gaon">질문 게시판</a>
+                        <a href="${path}/board/list">질문 게시판</a>
                     </li>
                 </ul>
             </div>

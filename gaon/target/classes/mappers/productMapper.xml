@@ -10,7 +10,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<![CDATA[
 			SELECT *
 			FROM (SELECT *
-		        FROM tb1_product
+		        FROM tbl_product
 		        ORDER BY p_good DESC)
 			WHERE rownum <= 8
 		]]>
@@ -20,7 +20,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<![CDATA[
 			SELECT *
 			FROM (SELECT *
-		        FROM tb1_product
+		        FROM tbl_product
 		        ORDER BY p_indate DESC)
 			WHERE rownum <= 8
 		]]>

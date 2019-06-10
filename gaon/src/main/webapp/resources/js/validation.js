@@ -223,7 +223,7 @@ function ajaxPwCheck(nowId, nowPw){
 
 
 
-
+var return_val = false;
 
 function idCheck(id) {
 	var memId = $.trim(id);
@@ -232,15 +232,15 @@ function idCheck(id) {
     	$('.box_inner').eq(0).text(checkResult.desc)
     						.css('color', 'tomato')
 							.css('display', 'block');
-    	val_id = false;
+    	return_val = false;
     } else {
     	if(ajaxCheck(memId) == "1"){
-    		val_id = true;
+    		return_val = true;
     	} else {
-    		val_id = false;
+    		return_val = false;
 		}
     }
-    return val_id;
+    return return_val;
 }
 
 function pwCheck(pw, rpw) {
@@ -268,9 +268,8 @@ function pwCheck(pw, rpw) {
 				return_val = false;
 			}
 		}
-        return false;
     }
-    return false;
+    return return_val;
 }
 
 function rpwCheck(pw, rpw){
@@ -283,24 +282,23 @@ function rpwCheck(pw, rpw){
     	$('.box_inner').eq(2).text(checkResult.desc)
     						.css('color', 'tomato')
 							.css('display', 'block');
-    	return false;
+    	return_val = false;
     } else {
     	$('.box_inner').eq(2).css('display', 'none');
 		
         if (memPw != null || memPw.length != 0) {
 			if (memPw == memRpw) { // pw, rpw가 같은지 확인
 				$('.box_inner').eq(2).css('display', 'none');
-				return true;
+				return_val = true;
 			} else {
 				$('.box_inner').eq(2).css('color', 'tomato')
 					 					 .css('display', 'block')
 					 					 .text('입력하신 비밀번호가 일치하지 않습니다.');
-				return false;
+				return_val = false;
 			}
 		}
-        return false;
     }
-    return false;
+    return return_val;
 }
 
 function nameCheck(name) {
@@ -312,22 +310,22 @@ function nameCheck(name) {
         $('.box_inner').eq(3).css('color', 'tomato')
                              .css('display', 'block')
                              .text("필수입력 정보입니다.");
-        return false;
+        return_val = false;
     } else if (name.match(regEmpty)) {
     	$('.box_inner').eq(3).css('color', 'tomato')
 	 	 					 .css('display', 'block')
 		 					 .text("공백 없이 표준 한글 2~8자까지 가능합니다.");
-    	return false;
+    	return_val = false;
 	} else if (!nameReg.test(name)) {
         $('.box_inner').eq(3).css('color', 'tomato')
                              .css('display', 'block')
                              .text("표준 한글 2~8자까지 가능합니다.");
-        return false;
+        return_val = false;
     } else {
         $('.box_inner').eq(3).css('display', 'none');
-        return true;
+        return_val = true;
     }
-    return false;
+    return return_val;
 }
 
 function phone1Check(phone){
@@ -337,29 +335,29 @@ function phone1Check(phone){
         $('.box_inner_phone').css('color', 'tomato')
                              .css('display', 'block')
                              .text("필수입력 정보입니다.");
-        return false;
+        return_val = false;
     } else if ($.isNumeric(phone) == false) {
     	$('.box_inner_phone').css('color', 'tomato')
 	 	 					 .css('display', 'block')
 		 					 .text("숫자만 입력해주세요.");
-    	return false;
+    	return_val = false;
 	} else if (phone.indexOf("01") != 0) {
 		// indexOf("01"): 01로 시작
 		// lastindexOf
         $('.box_inner_phone').css('color', 'tomato')
                              .css('display', 'block')
                              .text("번호가 유효하지 않습니다.");
-        return false;
+        return_val = false;
     } else if (phone.length != 3) {
         $('.box_inner_phone').css('color', 'tomato')
 		                     .css('display', 'block')
 		                     .text("번호가 유효하지 않습니다.");
-        return false;
+        return_val = false;
 	} else {
     	$('.box_inner_phone').css('display', 'none');
-    	return true;
+    	return_val = true;
     }
-    return false;
+    return return_val;
 }
 
 function phone2Check(phone){
@@ -369,22 +367,22 @@ function phone2Check(phone){
         $('.box_inner_phone').css('color', 'tomato')
                              .css('display', 'block')
                              .text("필수입력 정보입니다.");
-        return false;
+        return_val = false;
     } else if ($.isNumeric(phone) == false) {
     	$('.box_inner_phone').css('color', 'tomato')
 	 	 					 .css('display', 'block')
 		 					 .text("숫자만 입력해주세요.");
-    	return false;
+    	return_val = false;
 	} else if (phone.length != 4) {
         $('.box_inner_phone').css('color', 'tomato')
 		                     .css('display', 'block')
 		                     .text("번호가 유효하지 않습니다.");
-        return false;
+        return_val = false;
 	} else {
     	$('.box_inner_phone').css('display', 'none');
-    	return true;
+    	return_val = true;
     }
-    return false;
+    return return_val;
 }
 
 function emailCheck(email, url){
@@ -396,12 +394,12 @@ function emailCheck(email, url){
         $('.box_inner_email').css('color', 'tomato')
                              .css('display', 'block')
                              .text("필수입력 정보입니다.");
-        return false;
+        return_val = false;
     } else if (email.match(regEmpty)) {
     	$('.box_inner_email').css('color', 'tomato')
 	 	 					 .css('display', 'block')
 		 					 .text("올바른 이메일을 입력해주세요.");
-    	return false;
+    	return_val = false;
 	} else if (url != "" || url.length != 0) {
 		
 		var fullMail = email+"@"+url;
@@ -410,12 +408,12 @@ function emailCheck(email, url){
 			$('.box_inner_email').css('color', 'tomato')
 				 					 .css('display', 'block')
 				 					 .text("올바른 이메일을 입력해주세요.");
-			return false;
+			return_val = false;
 		} else {
 			$('.box_inner_email').css('display', 'none');
-			return true;
+			return_val = true;
 		}
-		return false;
+		return return_val;
 	}
 }
 
@@ -428,12 +426,12 @@ function urlCheck(email, url){
         $('.box_inner_email').css('color', 'tomato')
                              .css('display', 'block')
                              .text("필수입력 정보입니다.");
-        return false;
+        return_val = false;
     } else if (url.match(regEmpty)) {
     	$('.box_inner_email').css('color', 'tomato')
 	 	 					 .css('display', 'block')
 		 					 .text("올바른 이메일을 입력해주세요.");
-    	return false;
+    	return_val = false;
 	} else if (url != "" || url.length != 0) {
 		
 		var fullMail = email+"@"+url;
@@ -442,12 +440,12 @@ function urlCheck(email, url){
 			$('.box_inner_email').css('color', 'tomato')
 				 					 .css('display', 'block')
 				 					 .text("올바른 이메일을 입력해주세요.");
-			return false;
+			return_val = false;
 		} else {
 			$('.box_inner_email').css('display', 'none');
-			return true;
+			return_val = true;
 		}
-		return false;
+		return return_val;
 	}
 }
 
