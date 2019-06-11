@@ -373,10 +373,6 @@
         
         $(document).ready(function() {
         	// email을 합치고 input(hidden)에 담아야 전송됨
-        	var email_id = $("#sign_email_id").val();
-        	var email_url = $("#sign_email_url").val();
-        	var email = email_id + "@" + email_url;
-        	$("#email").val(email);
         	
         	var return_id = false;
         	var return_pw = false;
@@ -386,7 +382,6 @@
         	var return_phone3 = false;
         	var return_e_id = false;
         	var return_url = false;
-        	var return_zipcode = false;
         	var return_addr = false;
         	
         	var return_all = false;
@@ -396,58 +391,54 @@
         	});
             
             $('#btn_agree').click(function(){
-            	alert(return_all);
-            	
             	if (!return_id) {
 					$("#sign_id").focus();
 					return_all = false;
-					return false;
+					return;
 				}
             	if (!return_pw) {
 					$("#sign_pw1").focus();
 					return_all = false;
-					return false;
+					return;
 				}
             	if (!return_name) {
 					$("#sign_name").focus();
 					return_all = false;
-					return false;
+					return;
 				}
             	if (!return_phone1) {
 					$("#sign_phone_1").focus();
 					return_all = false;
-					return false;
+					return;
 				}
             	if (!return_phone2) {
 					$("#sign_phone_2").focus();
 					return_all = false;
-					return false;
+					return;
 				}
             	if (!return_phone3) {
 					$("#sign_phone_3").focus();
 					return_all = false;
-					return false;
+					return;
 				}
             	if (!return_e_id) {
 					$("#sign_email_id").focus();
 					return_all = false;
-					return false;
-				}
-            	if (!return_url) {
-					$("#sign_email_url").focus();
-					return_all = false;
-					return false;
-				}
-            	if (!return_zipcode) {
-					$("#sample6_detailAddress").focus();
-					return_all = false;
-					return false;
+					return;
 				}
             	if (!return_addr) {
 					$("#sample6_detailAddress").focus();
 					return_all = false;
-					return false;
+					return;
 				}
+            	return_all = true;
+            	alert(return_all);
+            	
+            	var email_id = $("#sign_email_id").val();
+            	var email_url = $("#sign_email_url").val();
+            	var email = email_id + "@" + email_url;
+            	$("#email").val(email);
+            	
             	if (return_all) {
             		$("#frm_mem").submit();
 				}
@@ -533,15 +524,13 @@
             	
             	if(zipcode == '' || addr == '') {
             		$('#sample4_postcode2').click();
-            		return_zipcode = false;
-            	} else {
-            		return_zipcode = true;
-				}
-            	console.log("return_zipcode = "+return_zipcode);
+            	}
             });
+        	
             
             $('#sample6_detailAddress').blur(function(){
             	var daddr = $(this).val();
+            	var maddr = $("#sample6_address").val();
             	
             	if(daddr == "" || daddr.length == 0) {
             		$("#box_inner_address").css('color', 'tomato')
@@ -549,10 +538,18 @@
 	 					 				.text("필수입력 정보입니다.");
             		return_addr = false;
             	} else {
-            		$("#box_inner_address").css('display', 'none');
-            		return_addr = true;
+                	if(maddr == "" || maddr.length == 0) {
+                		$("#box_inner_address").css('color', 'tomato')
+     					 					.css('display', 'block')
+    	 					 				.text("필수입력 정보입니다.");
+                		return_addr = false;
+                	} else {
+                		$("#box_inner_address").css('display', 'none');
+                		return_addr = true;
+                	}
             	}
             	console.log("return_addr = "+return_addr);
+            	return return_addr;
             });
         });
         

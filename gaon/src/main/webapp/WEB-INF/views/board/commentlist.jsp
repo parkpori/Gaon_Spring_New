@@ -29,7 +29,7 @@
 						<span class="comment_day">
 							<fmt:formatDate pattern="yyyy-mm-dd hh:mm:ss" value="${replyview.regdate}"/>
 						</span>
-						<c:if test="${sessionScope.loginUser.id == replyview.writer}">
+						<c:if test="${sessionScope.userid == replyview.writer}">
 							<a class="comment_delete reply_del" data_num="${replyview.rno}">삭제</a>
 						</c:if>
 					</span>
@@ -44,9 +44,9 @@
 	
 		
 	<c:choose>
-		<c:when test="${empty sessionScope.loginUser}">
+		<c:when test="${empty sessionScope.userid}">
 			<div class="comment_login">
-				<span>로그인을 하시면 댓글을 등록할 수 있습니다.</span>
+				<span>로그인을 하시면 댓글을 등록하실 수 있습니다.</span>
 			</div>
 		</c:when>
 		
@@ -55,17 +55,18 @@
 				<div class="comment_input">
 					<div class="comment_input_title">
 						<span>이름</span>
-						<span class="comment_input_name">${sessionScope.loginUser.id}</span>
+						<span class="comment_input_name">${sessionScope.userid}</span>
 					</div>
 					<div class="comment_input_text">
 						<textarea name="re_textarea" id="replyInsert" rows="" cols="150" placeholder="댓글을 남겨보세요."></textarea>
 						<script type="text/javascript">
 							var oEditors = [];
 							nhn.husky.EZCreator.createInIFrame({
-							 oAppRef: oEditors,
-							 elPlaceHolder: "replyInsert",
-							 sSkinURI: "<%=request.getContextPath()%>/smarteditor/SmartEditor2Skin.html",
-							 fCreator: "createSEditor2"
+								oAppRef: oEditors,
+								elPlaceHolder: "replyInsert",
+								sSkinURI: "${path}/resources/smarteditor/SmartEditor2Skin.html",
+								fCreator: "createSEditor2",
+								htParams:{fOnBeforeUnload : function(){} }
 							});
 						</script>
 					</div>
@@ -76,7 +77,7 @@
 					<a class="comment_btn" id="reply_btn">댓글등록</a>
 				</div>
 				
-				<input type="hidden" name="re_writer" value="${sessionScope.loginUser.id}">
+				<input type="hidden" name="re_writer" value="${sessionScope.userid}">
 				<input type="hidden" id="re_bno" name="re_bno">
 			</form>
 		</c:otherwise>

@@ -340,7 +340,7 @@
 	        		<tr>
 	        			<td>${bDto.bno}</td>
 	        			<td class="content_title">
-	        				<a href="${path}/boardView.gaon?bno=${bDto.bno}">
+	        				<a href="${path}/board/view?bno=${bDto.bno}">
 	        					${bDto.title}
 	        				</a>
 	        				

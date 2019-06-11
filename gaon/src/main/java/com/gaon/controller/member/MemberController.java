@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -69,7 +70,11 @@ public class MemberController {
 	
 	// DB를 통한 회원가입 액션
 	@RequestMapping(value="/create", method = RequestMethod.POST)
-	public String createPlay(MemberDTO mDto, RedirectAttributes rttr) {
+	public String createPlay(MemberDTO mDto, RedirectAttributes rttr,
+			@RequestParam(defaultValue="") int birth_year,
+			@RequestParam(defaultValue="") int birth_month,
+			@RequestParam(defaultValue="") int birth_day
+			) {
 		// MemberDTO로 데이터들을 한번에 받을 수 있음
 		// But 데이터들의 name이 DTO의 변수명과 같아야 함
 		// RedirectAttributes : 단발성으로 1번만 데이터 전송(referer에서 nologin했을 때 모달창 띄우는 법)

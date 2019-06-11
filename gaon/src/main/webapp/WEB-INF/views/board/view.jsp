@@ -6,9 +6,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="${path}/css/common.css?v=1">
+<link rel="stylesheet" href="${path}/resources/css/common.css?v=1">
 <title>Insert title here</title>
-<script type="text/javascript" src="${path}/smarteditor/js/service/HuskyEZCreator.js" charset="utf-8"></script>
+<script type="text/javascript" src="${path}/resources/smarteditor/js/service/HuskyEZCreator.js" charset="utf-8"></script>
 <style type="text/css">
 	.board_div {
 		width: 1000px;
@@ -469,13 +469,15 @@
 				</div>
 				<div class="board_btn">
 					<!-- 로그인 안 하면 리스트, 글쓰기, 답글 빼고 없앰 -->
-					<a href="boardList.gaon" class="btn_list white_btn" id="returnGo">리스트</a>
-					<a class="btn_reply black_btn">답글</a>
+					<a href="${path}/board/list" class="btn_list white_btn" id="returnGo">리스트</a>
+					<c:if test="${!empty sessionScope.userid}">
+						<a class="btn_reply black_btn">답글</a>
+					</c:if>
 					<div id="float_right">
-						<c:if test="${!empty sessionScope.loginUser.id}">
+						<c:if test="${!empty sessionScope.userid}">
 							<a class="btn_good white_btn" id="btn_good">좋아요</a>
 						</c:if>
-						<c:if test="${sessionScope.loginUser.id == one.writer}">
+						<c:if test="${sessionScope.userid == one.writer}">
 							<a href="${path}/boardupdate.gaon?bno=${one.bno}" class="btn_modify white_btn" id="btn_modify">수정</a>
 							<a class="btn_delete black_btn" id="btn_delete">삭제</a>
 						</c:if>
@@ -552,7 +554,7 @@
 						$("#replyInsert").val("");
 					},
 					error: function() {
-						alert("System Error!!!");
+						alert("replyAdd Error!!!");
 					}
 				});
 			}
@@ -569,16 +571,15 @@
 					comment_list();
 				},
 				error: function() {
-					alert("System Error!!!");
+					alert("replyRemove Error!!!");
 				}
 			});
 		});
 		
 		function comment_list() {
 			$.ajax({ // 데이터를 받을 때 String타입으로 밖에 못보낸다.(json으로 boolean을 싸면 json이 String타입으로 바꿔서 보내줌)
-				type: "post",
-				url: "commentlist.gaon",
-				data: "bno=${one.bno}",
+				type: "GET",
+				url: "${path}/reply/list?bno=${one.bno}",
 				success: function(result) { // result: commentlist.jsp가 들어있음
 					$("#commentList").html(result); // ajax에서는 갈데가 없으면 원래 jsp로 다시 돌아온다.
 				}
@@ -588,7 +589,7 @@
 		
 		function goodCnt(){
 			var bno = "${one.bno}";
-			var id = "${sessionScope.loginUser.id}";
+			var id = "${sessionScope.userid}";
 			
 			$.ajax({
 				type: "POST",
@@ -599,14 +600,14 @@
 					goodtotal();
 					
 				}, error: function(){
-					alert("Error!!");
+					alert("good Error!!");
 				}
 			});
 		 }
 		
 	function goodtotal(){
 		var bno = "${one.bno}";
-		var id = "${sessionScope.loginUser.id}";
+		var id = "${sessionScope.userid}";
 		
 		$.ajax({
 			type: "POST",
@@ -626,7 +627,7 @@
 					$("#goodcnt").text(data.goodTotal);
 				}
 			}, error: function(){
-				alert("Error!!");
+				alert("goodTotal Error!!");
 			}
 			
 		});
