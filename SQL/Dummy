@@ -8,8 +8,8 @@ CREATE SEQUENCE seq_product
 
 
 
-DROP TABLE tb1_product;
-CREATE TABLE tb1_product(
+DROP TABLE tbl_product;
+CREATE TABLE tbl_product(
     p_code VARCHAR2(5) PRIMARY KEY,
     p_name VARCHAR2(100) NOT NULL,
     p_type VARCHAR2(50) NOT NULL,
@@ -21,48 +21,48 @@ CREATE TABLE tb1_product(
 );
 
 
-INSERT INTO tb1_product(p_code, p_name, p_type, p_price, p_img, p_cnt, p_good)
+INSERT INTO tbl_product(p_code, p_name, p_type, p_price, p_img, p_cnt, p_good)
 VALUES(seq_product.NEXTVAL, '아이보리 레이스 원피스', '원피스', 95000, 'img01.png', 5, 25);
-INSERT INTO tb1_product(p_code, p_name, p_type, p_price, p_img, p_cnt, p_good)
+INSERT INTO tbl_product(p_code, p_name, p_type, p_price, p_img, p_cnt, p_good)
 VALUES(seq_product.NEXTVAL, '꽃자수한복 세트', '세트', 209000, 'img02.png', 7, 37);
-INSERT INTO tb1_product(p_code, p_name, p_type, p_price, p_img, p_cnt, p_good)
+INSERT INTO tbl_product(p_code, p_name, p_type, p_price, p_img, p_cnt, p_good)
 VALUES(seq_product.NEXTVAL, '흑화수 저고리', '저고리', 39000, 'img03.png', 6, 26);
-INSERT INTO tb1_product(p_code, p_name, p_type, p_price, p_img, p_cnt, p_good)
+INSERT INTO tbl_product(p_code, p_name, p_type, p_price, p_img, p_cnt, p_good)
 VALUES(seq_product.NEXTVAL, '레이스저고리 세트', '세트', 215000, 'img04.png', 7, 28);
-INSERT INTO tb1_product(p_code, p_name, p_type, p_price, p_img, p_cnt, p_good)
+INSERT INTO tbl_product(p_code, p_name, p_type, p_price, p_img, p_cnt, p_good)
 VALUES(seq_product.NEXTVAL, '생활한복 세트', '세트', 95000, 'img05.png', 9, 36);
-INSERT INTO tb1_product(p_code, p_name, p_type, p_price, p_img, p_cnt, p_good)
+INSERT INTO tbl_product(p_code, p_name, p_type, p_price, p_img, p_cnt, p_good)
 VALUES(seq_product.NEXTVAL, '채향 저고리', '저고리', 25000, 'img06.png', 12, 21);
-INSERT INTO tb1_product(p_code, p_name, p_type, p_price, p_img, p_cnt, p_good)
+INSERT INTO tbl_product(p_code, p_name, p_type, p_price, p_img, p_cnt, p_good)
 VALUES(seq_product.NEXTVAL, '도트한복 세트', '세트', 189000, 'img07.png', 14, 35);
-INSERT INTO tb1_product(p_code, p_name, p_type, p_price, p_img, p_cnt, p_good)
+INSERT INTO tbl_product(p_code, p_name, p_type, p_price, p_img, p_cnt, p_good)
 VALUES(seq_product.NEXTVAL, '목화분 저고리', '저고리', 39000, 'img08.png', 18, 19);
-INSERT INTO tb1_product(p_code, p_name, p_type, p_price, p_img, p_cnt, p_good)
+INSERT INTO tbl_product(p_code, p_name, p_type, p_price, p_img, p_cnt, p_good)
 VALUES(seq_product.NEXTVAL, '신세경한복 세트', '세트', 239000, 'img09.png', 23, 40);
-INSERT INTO tb1_product(p_code, p_name, p_type, p_price, p_img, p_cnt, p_good)
+INSERT INTO tbl_product(p_code, p_name, p_type, p_price, p_img, p_cnt, p_good)
 VALUES(seq_product.NEXTVAL, '고운비 허리치마', '스커트', 39000, 'img10.png', 22, 34);
-INSERT INTO tb1_product(p_code, p_name, p_type, p_price, p_img, p_cnt, p_good)
+INSERT INTO tbl_product(p_code, p_name, p_type, p_price, p_img, p_cnt, p_good)
 VALUES(seq_product.NEXTVAL, '분꽃 술 노리개', '액세서리', 23000, 'img11.png', 20, 24);
-INSERT INTO tb1_product(p_code, p_name, p_type, p_price, p_img, p_cnt, p_good)
+INSERT INTO tbl_product(p_code, p_name, p_type, p_price, p_img, p_cnt, p_good)
 VALUES(seq_product.NEXTVAL, '기품한복 세트', '세트', 219000, 'img12.png', 11, 32);
-INSERT INTO tb1_product(p_code, p_name, p_type, p_price, p_img, p_cnt, p_good)
+INSERT INTO tbl_product(p_code, p_name, p_type, p_price, p_img, p_cnt, p_good)
 VALUES(seq_product.NEXTVAL, '솔찬화 저고리', '저고리', 39900, 'img13.png', 16, 23);
-INSERT INTO tb1_product(p_code, p_name, p_type, p_price, p_img, p_cnt, p_good)
+INSERT INTO tbl_product(p_code, p_name, p_type, p_price, p_img, p_cnt, p_good)
 VALUES(seq_product.NEXTVAL, '예지아 저고리', '저고리', 12900, 'img14.png', 15, 22);
-INSERT INTO tb1_product(p_code, p_name, p_type, p_price, p_img, p_cnt, p_good)
+INSERT INTO tbl_product(p_code, p_name, p_type, p_price, p_img, p_cnt, p_good)
 VALUES(seq_product.NEXTVAL, '화이트펄 뒤꽂이', '액세서리', 9900, 'img15.png', 13, 38);
-INSERT INTO tb1_product(p_code, p_name, p_type, p_price, p_img, p_cnt, p_good)
+INSERT INTO tbl_product(p_code, p_name, p_type, p_price, p_img, p_cnt, p_good)
 VALUES(seq_product.NEXTVAL, '장미수 저고리', '저고리', 29900, 'img16.png', 13, 31);
 
 
-SELECT * FROM tb1_product
+SELECT * FROM tbl_product
 ORDER BY p_good DESC;
 
 
 -- best상품 8건 추출
 SELECT *
 FROM (SELECT *
-        FROM tb1_product
+        FROM tbl_product
         ORDER BY p_good DESC)
 WHERE rownum <= 8;
 
@@ -72,7 +72,7 @@ WHERE rownum <= 8;
 -- new상품 8건 추출
 SELECT *
 FROM (SELECT *
-        FROM tb1_product
+        FROM tbl_product
         ORDER BY p_indate DESC)
 WHERE rownum <= 8;
 
