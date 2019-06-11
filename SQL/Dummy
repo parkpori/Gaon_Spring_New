@@ -7,8 +7,9 @@ CREATE SEQUENCE seq_product
     NOCYCLE;
 
 
-DROP TABLE tbl_product;
-CREATE TABLE tbl_product(
+
+DROP TABLE tb1_product;
+CREATE TABLE tb1_product(
     p_code VARCHAR2(5) PRIMARY KEY,
     p_name VARCHAR2(100) NOT NULL,
     p_type VARCHAR2(50) NOT NULL,
@@ -20,48 +21,48 @@ CREATE TABLE tbl_product(
 );
 
 
-INSERT INTO tbl_product(p_code, p_name, p_type, p_price, p_img, p_cnt, p_good)
+INSERT INTO tb1_product(p_code, p_name, p_type, p_price, p_img, p_cnt, p_good)
 VALUES(seq_product.NEXTVAL, '아이보리 레이스 원피스', '원피스', 95000, 'img01.png', 5, 25);
-INSERT INTO tbl_product(p_code, p_name, p_type, p_price, p_img, p_cnt, p_good)
+INSERT INTO tb1_product(p_code, p_name, p_type, p_price, p_img, p_cnt, p_good)
 VALUES(seq_product.NEXTVAL, '꽃자수한복 세트', '세트', 209000, 'img02.png', 7, 37);
-INSERT INTO tbl_product(p_code, p_name, p_type, p_price, p_img, p_cnt, p_good)
+INSERT INTO tb1_product(p_code, p_name, p_type, p_price, p_img, p_cnt, p_good)
 VALUES(seq_product.NEXTVAL, '흑화수 저고리', '저고리', 39000, 'img03.png', 6, 26);
-INSERT INTO tbl_product(p_code, p_name, p_type, p_price, p_img, p_cnt, p_good)
+INSERT INTO tb1_product(p_code, p_name, p_type, p_price, p_img, p_cnt, p_good)
 VALUES(seq_product.NEXTVAL, '레이스저고리 세트', '세트', 215000, 'img04.png', 7, 28);
-INSERT INTO tbl_product(p_code, p_name, p_type, p_price, p_img, p_cnt, p_good)
+INSERT INTO tb1_product(p_code, p_name, p_type, p_price, p_img, p_cnt, p_good)
 VALUES(seq_product.NEXTVAL, '생활한복 세트', '세트', 95000, 'img05.png', 9, 36);
-INSERT INTO tbl_product(p_code, p_name, p_type, p_price, p_img, p_cnt, p_good)
+INSERT INTO tb1_product(p_code, p_name, p_type, p_price, p_img, p_cnt, p_good)
 VALUES(seq_product.NEXTVAL, '채향 저고리', '저고리', 25000, 'img06.png', 12, 21);
-INSERT INTO tbl_product(p_code, p_name, p_type, p_price, p_img, p_cnt, p_good)
+INSERT INTO tb1_product(p_code, p_name, p_type, p_price, p_img, p_cnt, p_good)
 VALUES(seq_product.NEXTVAL, '도트한복 세트', '세트', 189000, 'img07.png', 14, 35);
-INSERT INTO tbl_product(p_code, p_name, p_type, p_price, p_img, p_cnt, p_good)
+INSERT INTO tb1_product(p_code, p_name, p_type, p_price, p_img, p_cnt, p_good)
 VALUES(seq_product.NEXTVAL, '목화분 저고리', '저고리', 39000, 'img08.png', 18, 19);
-INSERT INTO tbl_product(p_code, p_name, p_type, p_price, p_img, p_cnt, p_good)
+INSERT INTO tb1_product(p_code, p_name, p_type, p_price, p_img, p_cnt, p_good)
 VALUES(seq_product.NEXTVAL, '신세경한복 세트', '세트', 239000, 'img09.png', 23, 40);
-INSERT INTO tbl_product(p_code, p_name, p_type, p_price, p_img, p_cnt, p_good)
+INSERT INTO tb1_product(p_code, p_name, p_type, p_price, p_img, p_cnt, p_good)
 VALUES(seq_product.NEXTVAL, '고운비 허리치마', '스커트', 39000, 'img10.png', 22, 34);
-INSERT INTO tbl_product(p_code, p_name, p_type, p_price, p_img, p_cnt, p_good)
+INSERT INTO tb1_product(p_code, p_name, p_type, p_price, p_img, p_cnt, p_good)
 VALUES(seq_product.NEXTVAL, '분꽃 술 노리개', '액세서리', 23000, 'img11.png', 20, 24);
-INSERT INTO tbl_product(p_code, p_name, p_type, p_price, p_img, p_cnt, p_good)
+INSERT INTO tb1_product(p_code, p_name, p_type, p_price, p_img, p_cnt, p_good)
 VALUES(seq_product.NEXTVAL, '기품한복 세트', '세트', 219000, 'img12.png', 11, 32);
-INSERT INTO tbl_product(p_code, p_name, p_type, p_price, p_img, p_cnt, p_good)
+INSERT INTO tb1_product(p_code, p_name, p_type, p_price, p_img, p_cnt, p_good)
 VALUES(seq_product.NEXTVAL, '솔찬화 저고리', '저고리', 39900, 'img13.png', 16, 23);
-INSERT INTO tbl_product(p_code, p_name, p_type, p_price, p_img, p_cnt, p_good)
+INSERT INTO tb1_product(p_code, p_name, p_type, p_price, p_img, p_cnt, p_good)
 VALUES(seq_product.NEXTVAL, '예지아 저고리', '저고리', 12900, 'img14.png', 15, 22);
-INSERT INTO tbl_product(p_code, p_name, p_type, p_price, p_img, p_cnt, p_good)
+INSERT INTO tb1_product(p_code, p_name, p_type, p_price, p_img, p_cnt, p_good)
 VALUES(seq_product.NEXTVAL, '화이트펄 뒤꽂이', '액세서리', 9900, 'img15.png', 13, 38);
-INSERT INTO tbl_product(p_code, p_name, p_type, p_price, p_img, p_cnt, p_good)
+INSERT INTO tb1_product(p_code, p_name, p_type, p_price, p_img, p_cnt, p_good)
 VALUES(seq_product.NEXTVAL, '장미수 저고리', '저고리', 29900, 'img16.png', 13, 31);
 
 
-SELECT * FROM tbl_product
+SELECT * FROM tb1_product
 ORDER BY p_good DESC;
 
 
 -- best상품 8건 추출
 SELECT *
 FROM (SELECT *
-        FROM tbl_product
+        FROM tb1_product
         ORDER BY p_good DESC)
 WHERE rownum <= 8;
 
@@ -71,7 +72,7 @@ WHERE rownum <= 8;
 -- new상품 8건 추출
 SELECT *
 FROM (SELECT *
-        FROM tbl_product
+        FROM tb1_product
         ORDER BY p_indate DESC)
 WHERE rownum <= 8;
 
@@ -117,6 +118,9 @@ VALUES('user02', '12345', '박보리', '010', '3333', '4444', 'user02@gmail.com'
 INSERT INTO tbl_member(id, pw, name, phone1, phone2, phone3, email, zipcode, addr1, addr2, birth_year, birth_month, birth_day)
 VALUES('user03', '12345', '체리', '010', '5555', '6666', 'user03@gmail.com', '12345', '광주광역시 북구', '체리네집', '2005', '3', '10');
 
+INSERT INTO tbl_member(id, pw, name, phone1, phone2, phone3, email, zipcode, addr1, addr2, birth_year, birth_month, birth_day)
+VALUES('user04', '12345', '제리', '010', '7777', '4444', 'user04@gmail.com', '12345', '광주광역시 북구', '제리네집', '1999', '5', '12');
+
 
 SELECT *
 FROM tbl_member;
@@ -137,7 +141,7 @@ DROP SEQUENCE seq_board;
 CREATE SEQUENCE seq_board
 START WITH 1
 INCREMENT BY 1;
- 
+
 DROP TABLE tbl_board;
 CREATE TABLE tbl_board(
     bno NUMBER PRIMARY KEY,
@@ -152,11 +156,10 @@ CREATE TABLE tbl_board(
     filesize NUMBER
 );
 
-
 INSERT INTO tbl_board(bno, title, content, writer)
 VALUES(seq_board.NEXTVAL, '테스트페이지입니다1', '테스트에요1', 'user04');
 INSERT INTO tbl_board(bno, title, content, writer)
-VALUES(seq_board.NEXTVAL, '테스트페이지입니다2', '테스트에요2', 'user02');
+VALUES(seq_board.NEXTVAL, '테스트페이지입니다3', '테스트에요2', 'user02');
 INSERT INTO tbl_board(bno, title, content, writer)
 VALUES(seq_board.NEXTVAL, '테스트페이지입니다3', '테스트에요3', 'user03');
 INSERT INTO tbl_board(bno, title, content, writer)
@@ -173,19 +176,12 @@ INSERT INTO tbl_board(bno, title, content, writer)
 VALUES(seq_board.NEXTVAL, '테스트페이지입니다9', '테스트에요9', 'user04');
 INSERT INTO tbl_board(bno, title, content, writer)
 VALUES(seq_board.NEXTVAL, '테스트페이지입니다10', '테스트에요10', 'user04');
-INSERT INTO tbl_board(bno, title, content, writer)
-VALUES(seq_board.NEXTVAL, '테스트페이지입니다11', '테스트에요11', 'user03');
-INSERT INTO tbl_board(bno, title, content, writer)
-VALUES(seq_board.NEXTVAL, '테스트페이지입니다12', '테스트에요12', 'user04');
-INSERT INTO tbl_board(bno, title, content, writer)
-VALUES(seq_board.NEXTVAL, '테스트페이지입니다13', '테스트에요13', 'user04');
 
 SELECT * FROM tbl_board
 ORDER BY bno DESC;
 
-SELECT COUNT(*) FROM tbl_board;
 
-COMMIT;
+
 
 SELECT *
 FROM (SELECT rownum rnum, a.*
@@ -195,12 +191,18 @@ FROM (SELECT rownum rnum, a.*
             ORDER BY bno DESC
             ) a
       ) WHERE rnum BETWEEN 1 AND 10;
-      
-      
-      
-      
-      
-      
+
+
+
+COMMIT;
+
+
+
+
+
+
+
+
 
 
 -- gaon 댓글 테이블
@@ -218,7 +220,6 @@ CREATE TABLE tbl_reply(
     bno NUMBER NOT NULL
 );
 
--- 제약조건
 ALTER TABLE tbl_reply
 ADD CONSTRAINT tbl_reply_fk_bno
 FOREIGN KEY(bno) REFERENCES tbl_board(bno)
