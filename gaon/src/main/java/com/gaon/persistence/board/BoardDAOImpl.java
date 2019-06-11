@@ -14,6 +14,7 @@ import com.gaon.domain.board.BoardDTO;
 
 import lombok.extern.slf4j.Slf4j;
 
+
 @Slf4j
 @Repository
 public class BoardDAOImpl implements BoardDAO {

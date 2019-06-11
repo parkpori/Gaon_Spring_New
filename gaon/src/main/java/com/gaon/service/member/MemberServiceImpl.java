@@ -10,6 +10,7 @@ import com.gaon.persistence.member.MemberDAO;
 
 import lombok.extern.slf4j.Slf4j;
 
+
 @Slf4j
 @Service
 public class MemberServiceImpl implements MemberService {

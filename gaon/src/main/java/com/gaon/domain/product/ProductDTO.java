@@ -3,11 +3,11 @@ package com.gaon.domain.product;
 import java.util.Date;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+
 
 //lombok(@만 붙여주면 자동으로 생성자, 전체생성자, getter, setter를 다 만들어 준다.)
 

@@ -15,6 +15,7 @@ import com.gaon.service.member.MemberService;
 
 import lombok.extern.slf4j.Slf4j;
 
+
 @Controller
 @Slf4j
 @RequestMapping(value="member/*") // member/안에 있는 모든 경로
