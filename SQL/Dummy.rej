@@ -1,0 +1,13 @@
+diff a/SQL/Dummy b/SQL/Dummy	(rejected hunks)
+@@ -7,9 +7,8 @@
+     NOCYCLE;
+ 
+ 
+-
+-DROP TABLE tb1_product;
+-CREATE TABLE tb1_product(
++DROP TABLE tbl_product;
++CREATE TABLE tbl_product(
+     p_code VARCHAR2(5) PRIMARY KEY,
+     p_name VARCHAR2(100) NOT NULL,
+     p_type VARCHAR2(50) NOT NULL,
