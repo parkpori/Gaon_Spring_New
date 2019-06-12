@@ -67,7 +67,7 @@ public class BoardController {
 	}
 	
 	//게시글 1건(상세게시글) 출력
-		@RequestMapping(value="/view", method=RequestMethod.GET)
+		@RequestMapping(value="view", method=RequestMethod.GET)
 		public String view(int bno, Model model, HttpSession session) {
 			log.info("상세 게시글 출력");
 			//조회수 증가처리

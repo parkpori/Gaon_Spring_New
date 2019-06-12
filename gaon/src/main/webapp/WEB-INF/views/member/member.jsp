@@ -344,7 +344,7 @@
 	            <div class="sign_birth">
 	                <input type="text" class="sign_year_day"  id="yy" placeholder="년(4자)" name="birth_year">
 	                <select class="sign_year_day" name="birth_month">
-	                    <option>월</option>
+	                    <option value="">월</option>
 	                    <option value="1">1</option>
 	                    <option value="2">2</option>
 	                    <option value="3">3</option>
@@ -372,7 +372,6 @@
     <script type="text/javascript">
         
         $(document).ready(function() {
-        	// email을 합치고 input(hidden)에 담아야 전송됨
         	
         	var return_id = false;
         	var return_pw = false;
@@ -383,7 +382,6 @@
         	var return_e_id = false;
         	var return_url = false;
         	var return_addr = false;
-        	
         	var return_all = false;
         	
         	$('#btn_default').click(function(){
@@ -432,8 +430,8 @@
 					return;
 				}
             	return_all = true;
-            	alert(return_all);
             	
+            	// email을 합치고 input(hidden)에 담아야 전송됨
             	var email_id = $("#sign_email_id").val();
             	var email_url = $("#sign_email_url").val();
             	var email = email_id + "@" + email_url;

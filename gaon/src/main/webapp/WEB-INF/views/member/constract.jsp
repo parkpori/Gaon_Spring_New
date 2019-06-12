@@ -241,6 +241,31 @@
 				}
 			});
 			
+			$(".constract_ck").click(function(){
+				var ck2 = $("#constract_ck2").is(":checked");
+				var ck3 = $("#constract_ck3").is(":checked");
+				var ck4 = $("#constract_ck4").is(":checked");
+				var ck5 = $("#constract_ck5").is(":checked");
+				
+				if(ck2 == true) {
+					if (ck3 == true) {
+						if (ck4 == true) {
+							if (ck5 == true) {
+								$("#constract_ck1").prop("checked", true);
+							} else {
+								$("#constract_ck1").prop("checked", false);
+							}
+						} else {
+							$("#constract_ck1").prop("checked", false);
+						}
+					} else {
+						$("#constract_ck1").prop("checked", false);
+					}
+				} else {
+					$("#constract_ck1").prop("checked", false);
+				}
+			});
+			
 			$("#btn_agree").click(function(){
 				var filsu1 = $("#constract_ck2").is(":checked");
 				var filsu2 = $("#constract_ck3").is(":checked");

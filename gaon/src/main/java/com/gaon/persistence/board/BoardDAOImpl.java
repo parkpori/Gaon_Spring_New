@@ -70,5 +70,4 @@ public class BoardDAOImpl implements BoardDAO {
 		
 		return sqlSession.selectOne("board.countArticle", map);
 	}
-	
 }

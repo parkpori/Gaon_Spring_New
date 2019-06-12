@@ -25,8 +25,8 @@ public class MemberDTO {
 	private String zipcode;
 	private String addr1;
 	private String addr2;
-	private int birth_year;
-	private int birth_month;
-	private int birth_day;
+	private String birth_year;
+	private String birth_month;
+	private String birth_day;
 	private Date regdate;
 }

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.gaon.domain.board.ReplyDTO;
 import com.gaon.service.board.ReplyService;
@@ -23,12 +24,29 @@ public class ReplyController {
 	private ReplyService service;
 	
 	//ajax식일때는 ResponsBody를 붙이지 않는다.
-		@RequestMapping(value="/list", method=RequestMethod.GET)
-		public String list(int bno, Model model) {
-			log.info("댓글목록 출력");
-			List<ReplyDTO> list = service.list(bno);
-			model.addAttribute("replyList", list);
-			
-			return "board/commentlist";
-		}
+	@RequestMapping(value="/list", method=RequestMethod.GET)
+	public String list(int bno, Model model) {
+		log.info(">>>>> 댓글목록 출력");
+		List<ReplyDTO> list = service.list(bno);
+		model.addAttribute("replyList", list);
+		
+		return "board/commentlist";
+	}
+	
+	// 댓글 등록
+	@ResponseBody
+	@RequestMapping(value="create", method=RequestMethod.POST)
+	public void create(ReplyDTO rDto) {
+		log.info(">>>>> 댓글등록");
+		service.create(rDto);
+	}
+	
+	// 댓글 삭제
+	@ResponseBody
+	@RequestMapping(value="delete", method=RequestMethod.GET)
+	public void delete(ReplyDTO rDto) {
+		log.info(">>>>> 댓글삭제");
+		log.info(rDto.toString());
+		service.delete(rDto);
+	}
 }

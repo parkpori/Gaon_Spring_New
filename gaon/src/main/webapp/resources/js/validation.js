@@ -412,7 +412,6 @@ function emailCheck(email, url){
 		} else {
 			$('.box_inner_email').css('display', 'none');
 			return_val = true;
-			alert("^^");
 		}
 		return return_val;
 	}
@@ -445,7 +444,6 @@ function urlCheck(email, url){
 		} else {
 			$('.box_inner_email').css('display', 'none');
 			return_val = true;
-			alert("^^");
 		}
 		return return_val;
 	}

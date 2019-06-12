@@ -51,14 +51,14 @@
 		</c:when>
 		
 		<c:otherwise>
-			<form action="replyAdd.gaon" method="POST" name="frm_reply" id="frm_reply">
+			<form action="${path}/reply/create" method="POST" name="frm_reply" id="frm_reply">
 				<div class="comment_input">
 					<div class="comment_input_title">
 						<span>이름</span>
 						<span class="comment_input_name">${sessionScope.userid}</span>
 					</div>
 					<div class="comment_input_text">
-						<textarea name="re_textarea" id="replyInsert" rows="" cols="150" placeholder="댓글을 남겨보세요."></textarea>
+						<textarea name="content" id="replyInsert" rows="" cols="150" placeholder="댓글을 남겨보세요."></textarea>
 						<script type="text/javascript">
 							var oEditors = [];
 							nhn.husky.EZCreator.createInIFrame({
@@ -77,8 +77,8 @@
 					<a class="comment_btn" id="reply_btn">댓글등록</a>
 				</div>
 				
-				<input type="hidden" name="re_writer" value="${sessionScope.userid}">
-				<input type="hidden" id="re_bno" name="re_bno">
+				<input type="hidden" name="writer" value="${sessionScope.userid}">
+				<input type="hidden" id="re_bno" name="bno">
 			</form>
 		</c:otherwise>
 	</c:choose>

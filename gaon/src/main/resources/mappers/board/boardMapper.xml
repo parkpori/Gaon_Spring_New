@@ -7,7 +7,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 게시글목록 출력 -->
 	<select id="listAll" resultType="com.gaon.domain.board.BoardDTO">
 		<include refid="paging_header"/>
-		SELECT bno, title, content, writer, m.id, viewcnt, goodcnt, b.regdate
+		SELECT bno, title, content, writer, m.id, viewcnt, goodcnt, replycnt, b.regdate
 		FROM tbl_board b, tbl_member m
 		<include refid="search"/>
 		<if test="sort_option == 'new'">
@@ -70,6 +70,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE bno = #{bno}
 	</select>
 	
+	<!-- 조회수 + 1 증가 -->
 	<update id="increaseViewCnt">
 		UPDATE tbl_board
 		SET

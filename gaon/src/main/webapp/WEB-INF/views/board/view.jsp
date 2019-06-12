@@ -483,6 +483,7 @@
 						</c:if>
 					</div>
 				</div>
+				<input type="hidden" name="replycnt" value="${one.replycnt}">
 				<div id="reply_wrap">
 					<div id="commentList">
 					</div>
@@ -493,7 +494,6 @@
 	<%@ include file="../include/footer.jsp" %>
 	
 	<script type="text/javascript">
-		var flag = 0;
 		$(document).ready(function(){
 			/* 문서가 준비되면 댓글 목록을 조회하는 AJAX 실행 */
 			comment_list();
@@ -531,9 +531,11 @@
 		$(document).on("click", "#reply_btn", function(){
 			
 			oEditors.getById["replyInsert"].exec("UPDATE_CONTENTS_FIELD", []);
+			// textarea에 스마트에디터의 값을 알려줌
 			
 			
 			var content = $("#replyInsert").val();
+			var text = content.replace(/[<][^>]*[>]/gi, "");
 			
 			if (content == "<p><br></p>") {
 				// 유효성체크
@@ -545,7 +547,7 @@
 				$('#re_bno').val(bno);
 				
 				$.ajax({ // ajax로 폼태그를 이용해 데이터를 보내는 방법
-					url: "replyAdd.gaon",
+					url: "${path}/reply/create",
 					type: "POST",
 					data: $("#frm_reply").serialize(), // serialize: form태그를 byte코드화(직렬화)시켜서 쉽게 전송함
 					contentType: "application/x-www-form-urlencoded; charset=UTF-8",
@@ -565,8 +567,7 @@
 			var bno = '${one.bno}';
 			
 			$.ajax({
-				url: "replyRemove.gaon",
-				data: "rno=" + rno + "&bno=" + bno,
+				url: "${path}/reply/delete?rno="+rno+"&bno="+bno,
 				success: function(result) {
 					comment_list();
 				},
@@ -593,7 +594,7 @@
 			
 			$.ajax({
 				type: "POST",
-				url: "good.gaon",
+				url: "${path}/board/good",
 				dataType: "json",
 				data: "bno=" + bno + "&id=" + id,
 				success: function(goodTotal){

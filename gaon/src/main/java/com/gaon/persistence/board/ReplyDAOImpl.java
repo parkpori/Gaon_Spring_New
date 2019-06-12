@@ -25,12 +25,22 @@ public class ReplyDAOImpl implements ReplyDAO {
 
 	@Override
 	public void create(ReplyDTO rDto) {
-		
+		sqlSession.insert("reply.create", rDto);
 	}
 
 	@Override
 	public void delete(ReplyDTO rDto) {
-		
+		sqlSession.delete("reply.delete", rDto);
+	}
+
+	@Override
+	public void updateAdd(ReplyDTO rDto) {
+		sqlSession.update("reply.updateAdd", rDto);
+	}
+
+	@Override
+	public void updateDelete(ReplyDTO rDto) {
+		sqlSession.update("reply.updateDelete", rDto);
 	}
 	
 }
