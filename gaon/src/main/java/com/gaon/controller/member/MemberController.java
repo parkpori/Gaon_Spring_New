@@ -100,7 +100,7 @@ public class MemberController {
 	@RequestMapping(value="/update", method = RequestMethod.POST)
 	public String updatePlay(MemberDTO mDto, HttpSession session) {
 		log.info(">>>>> 회원정보 수정 액션");
-		// log.info(mDto.toString());
+		log.info(mDto.toString());
 		service.updateMember(mDto, session);
 		return "redirect:/";
 	}

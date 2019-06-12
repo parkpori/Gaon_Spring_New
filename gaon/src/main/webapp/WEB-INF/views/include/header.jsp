@@ -115,7 +115,7 @@
 	        <div class="header_img">
 	        
 	        </div>
-	        <a href="index.gaon">
+	        <a href="${path}/">
 	            <span class="header_title_logo">
 	                <img src="${path}/resources/img/logo.png" alt="로고이미지">
 	            </span>

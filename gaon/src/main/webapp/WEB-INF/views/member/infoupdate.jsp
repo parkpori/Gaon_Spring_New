@@ -334,7 +334,7 @@
 	            <div class="update_birth">
 	                <input type="text" class="update_year_day"  id="yy" placeholder="년(4자)" name="birth_year" value="${one.birth_year}">
 	                <select class="update_year_day" name="birth_month" id="mm">
-	                    <option value="">월</option>
+	                    <option value="0">월</option>
 	                    <option value="1">1</option>
 	                    <option value="2">2</option>
 	                    <option value="3">3</option>
@@ -367,171 +367,21 @@
 	        	location.href = "${path}/";
 	        });
         	
-        	var return_id = false;
-        	var return_pw = false;
-        	var return_name = false;
-        	var return_phone1 = false;
-        	var return_phone2 = false;
-        	var return_phone3 = false;
-        	var return_e_id = false;
-        	var return_url = false;
-        	var return_addr = false;
-        	var return_all = false;
-        	
-        	$('#btn_default').click(function(){
-        		location.href = "${path}/";
-        	});
-            
-            $('#btn_agree').click(function(){
-            	if (!return_pw) {
-					$("#sign_pw1").focus();
-					return_all = false;
-					return;
-				}
-            	if (!return_name) {
-					$("#sign_name").focus();
-					return_all = false;
-					return;
-				}
-            	if (!return_phone1) {
-					$("#sign_phone_1").focus();
-					return_all = false;
-					return;
-				}
-            	if (!return_phone2) {
-					$("#sign_phone_2").focus();
-					return_all = false;
-					return;
-				}
-            	if (!return_phone3) {
-					$("#sign_phone_3").focus();
-					return_all = false;
-					return;
-				}
-            	if (!return_e_id) {
-					$("#sign_email_id").focus();
-					return_all = false;
-					return;
-				}
-            	if (!return_addr) {
-					$("#sample6_detailAddress").focus();
-					return_all = false;
-					return;
-				}
-            	return_all = true;
-            	
-            	// email을 합치고 input(hidden)에 담아야 전송됨
-            	var email_id = $("#sign_email_id").val();
-            	var email_url = $("#sign_email_url").val();
-            	var email = email_id + "@" + email_url;
-            	$("#email").val(email);
-            	
-            	if (return_all) {
-            		$("#frm_mem").submit();
-				}
-        	});
-        
-			$('#sign_pw1').blur(function() {
-				var pw = $('#sign_pw1').val();
-				var rpw = $('#sign_pw2').val();
-				return_pw = pwCheck(pw, rpw);
-				console.log("return_pw1 = "+return_pw);
-            });
-            
-            $('#sign_pw2').blur(function() {
-            	var pw = $('#sign_pw1').val();
-				var rpw = $('#sign_pw2').val();
-				return_pw = rpwCheck(pw, rpw);
-				console.log("return_pw2 = "+return_pw);
-            });
-            
-			$('#update_name').blur(function() {
-                var name = $.trim($(this).val());
-                return_name = nameCheck(name);
-                console.log("return_name = "+return_name);
-            });
-        
-			$("#sign_phone_1").blur(function() {
-                var phone = $.trim($(this).val());
-                return_phone1 = phone1Check(phone);
-                console.log("return_phone1 = "+return_phone1);
-            });
-			
-			$("#sign_phone_2").blur(function() {
-                var phone = $.trim($(this).val());
-                return_phone2 = phone2Check(phone);
-                console.log("return_phone2 = "+return_phone2);
-            });
-			
-			$("#sign_phone_3").blur(function() {
-                var phone = $.trim($(this).val());
-                return_phone3 = phone2Check(phone);
-                console.log("return_phone3 = "+return_phone3);
-            });
-			
-			$('#sign_email_id').blur(function() {
-                var email = $.trim($('#sign_email_id').val());
-                var url = $.trim($('#sign_email_url').val());
-                return_e_id = emailCheck(email, url);
-                console.log("return_e_id = "+return_e_id);
-            });
-			
-			$('#sign_email_url').blur(function() {
-                var email = $.trim($('#sign_email_id').val());
-                var url = $.trim($('#sign_email_url').val());
-                return_url = urlCheck(email, url);
-                console.log("return_url = "+return_url);
-            });
 
-            $('#sign_email_select').change(function() {
-                var eUrl = $(this).val();
+            var addressReg = RegExp(/^[가-힣0-9._-]{1,100}$/);
+            var yyReg = RegExp(/^[0-9]{4}$/);
+            var ddReg = RegExp(/^[0-9]{1,2}$/);
 
-                if (eUrl == 'directVal') {
-                    $('#sign_email_url').val('');
-                    $('#sign_email_url').focus();
-                    $('#sign_email_url').removeAttr('readonly');
-                } else {
-                    $('#sign_email_url').val(eUrl);
-                    $('#sign_email_url').prop('readonly', true);
-                    $('#sign_email_id').blur();
-                }
-            });
-
-        	// 우편번호, 주소 클릭시 다음주소API 창 출력
-            $('.addrbtn').click(function(){
-            	var zipcode = $('.addrbtn').eq(0).val();
-            	var addr = $('.addrbtn').eq(1).val();
-            	// alert(zipcode + ', ' + addr);
-            	
-            	if(zipcode == '' || addr == '') {
-            		$('#sample4_postcode2').click();
-            	}
-            });
-        	
-            
-            $('#sample6_detailAddress').blur(function(){
-            	var daddr = $(this).val();
-            	var maddr = $("#sample6_address").val();
-            	
-            	if(daddr == "" || daddr.length == 0) {
-            		$("#box_inner_address").css('color', 'tomato')
- 					 					.css('display', 'block')
-	 					 				.text("필수입력 정보입니다.");
-            		return_addr = false;
-            	} else {
-                	if(maddr == "" || maddr.length == 0) {
-                		$("#box_inner_address").css('color', 'tomato')
-     					 					.css('display', 'block')
-    	 					 				.text("필수입력 정보입니다.");
-                		return_addr = false;
-                	} else {
-                		$("#box_inner_address").css('display', 'none');
-                		return_addr = true;
-                	}
-            	}
-            	console.log("return_addr = "+return_addr);
-            	return return_addr;
-            });
+        	$("#btn_agree").click(function(){
+        		
+        		var email_id = $("#update_email_id").val();
+        		var email_url = $("#update_email_url").val();
+        		var email = email_id + "@" + email_url;
+        		$("#email").val(email);
+        		
+	        	// 유효성 체크하는 값을 받아온다.
+	        	$("#frm_mem").submit();
+	        });
             
             $('#update_name').blur(function() {
 				
