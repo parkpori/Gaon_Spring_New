@@ -102,9 +102,9 @@ CREATE TABLE tbl_member(
     zipcode VARCHAR2(20) NOT NULL,
     addr1 VARCHAR2(200) NOT NULL,
     addr2 VARCHAR2(200) NOT NULL,
-    birth_year NUMBER(4, 0),
-    birth_month NUMBER(2, 0),
-    birth_day NUMBER(2, 0),
+    birth_year VARCHAR2(30),
+    birth_month VARCHAR2(30),
+    birth_day VARCHAR2(30),
     regdate DATE DEFAULT SYSDATE
 );
 
