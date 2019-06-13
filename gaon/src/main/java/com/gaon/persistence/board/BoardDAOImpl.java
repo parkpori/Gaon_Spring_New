@@ -70,4 +70,9 @@ public class BoardDAOImpl implements BoardDAO {
 		
 		return sqlSession.selectOne("board.countArticle", map);
 	}
+
+	@Override
+	public void createPlay(BoardDTO bDto) {
+		sqlSession.insert("board.insert", bDto);
+	}
 }

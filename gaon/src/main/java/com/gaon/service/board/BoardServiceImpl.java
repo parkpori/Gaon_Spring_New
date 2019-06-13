@@ -30,7 +30,6 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public void delete(int bno) {
-		// TODO Auto-generated method stub
 		
 	}
 
@@ -64,6 +63,11 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public int countArticle(String search_option, String keyword) {
 		return bDao.countArticle(search_option, keyword);
+	}
+
+	@Override
+	public void createPlay(BoardDTO bDto) {
+		bDao.createPlay(bDto);
 	}
 	
 }

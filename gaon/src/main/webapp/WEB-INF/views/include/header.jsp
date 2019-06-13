@@ -15,7 +15,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	
 	<div id="modal_all">
         <div id="modal_login">
             <a id="modal_all_close">
@@ -189,7 +188,29 @@
         </div>
     </header>
     <script type="text/javascript">
+
+	// LoginInterceptor에서 보내는 메세지
+	var message = "${message}"; // 로그인이 안됐을 때 보내는 메세지
+	var uri = "${uri}"; // 로그인이 됐을 때 이동하게 하기위해 가져옴
+    
         $(function() {
+        	if (message=="nologin") {
+        		$('#modal_all').css('display', 'flex');
+    	        $("#login_id").focus();
+    	        $(".login_box_inner").css("display", "block")
+				 .text("로그인이 필요한 시스템입니다.");
+			}
+        	
+        	$('#login_open').click(function() {
+    	        $('#modal_all').css('display', 'flex');
+    	        $("#login_id").focus();
+    	    });
+    	    $('#modal_all_close').click(function() {
+    	        $('#modal_all').css('display', 'none');
+    	        $("#login_id").val("");
+    	        $("#login_pw").val("");
+    	    });
+    	    
 
             $('#login_open').click(function() {
                 $('#modal_all').css('display', 'flex');
@@ -244,7 +265,11 @@
             		data: "id="+id+"&pw="+pw,
             		success: function(data){
             			if (data == "1") {
-							location.reload();
+            				if (uri == '') {
+            					location.reload();
+							} else {
+								location.href = uri;
+							}
 						} else if (data = "-1") {
 							$('#login_id').focus();
 							$('.login_box_inner').text("아이디 또는 비밀번호가 일치하지 않습니다.")

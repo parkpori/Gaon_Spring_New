@@ -67,14 +67,35 @@ public class BoardController {
 	}
 	
 	//게시글 1건(상세게시글) 출력
-		@RequestMapping(value="view", method=RequestMethod.GET)
-		public String view(int bno, Model model, HttpSession session) {
-			log.info("상세 게시글 출력");
-			//조회수 증가처리
-			service.increaseViewCnt(bno, session);
-			
-			BoardDTO bDto = service.read(bno);
-			model.addAttribute("one", bDto); 
-			return "board/view";
-		}
+	@RequestMapping(value="view", method=RequestMethod.GET)
+	public String view(int bno, Model model, HttpSession session) {
+		log.info("상세 게시글 출력");
+		//조회수 증가처리
+		service.increaseViewCnt(bno, session);
+		
+		BoardDTO bDto = service.read(bno);
+		model.addAttribute("one", bDto); 
+		return "board/view";
+	}
+	
+	// 게시글 등록 페이지 출력
+	@RequestMapping(value="create", method=RequestMethod.GET)
+	public String createView() {
+		log.info(">>>>> 게시글 등록 페이지 출력");
+		
+		return "board/register";
+	}
+	@RequestMapping(value="create", method=RequestMethod.POST)
+	public String createPlay(BoardDTO bDto) {
+		log.info(">>>>> 게시글 등록 액션!");
+		service.createPlay(bDto);
+		return "redirect:list";
+	}
+	
+	public String delete(int bno) {
+		log.info(">>>>> 게시글 삭제");
+		service.delete(bno);
+		return "";
+	}
+		
 }

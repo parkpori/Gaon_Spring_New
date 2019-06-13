@@ -411,15 +411,7 @@
 		</div>
 	</div>
 	<script type="text/javascript">
-	var message = '<%=message%>';
 		$(document).ready(function(){
-			
-			if (message == "nologin") {
-				$('#modal_all').css('display', 'flex');
-                $("#login_id").focus();
-                $(".login_box_inner").css("display", "block")
- 									.text("로그인이 필요한 시스템입니다.");
-			}
 			
 			var flag1 = 0;
 			var flag2 = 0;
@@ -457,24 +449,7 @@
 			
 			
 			$("#boardAdd").on("click", function(){
-				$.ajax({
-					url: "registerAjax.gaon",
-					type: "POST",
-					dataType: "json",
-					success: function(data){
-						if (data.message == "login") {
-							location.href="registerView.gaon";
-						} else if (data.message == "nologin") {
-							$('#modal_all').css('display', 'flex');
-			                $("#login_id").focus();
-			                $(".login_box_inner").css("display", "block")
-			 									.text("로그인이 필요한 시스템입니다.");
-						}
-					},
-					error: function() {
-						alert("System Error!!!");
-					}
-				});
+				location.href="${path}/board/create"; // Context-root로 이동
 			});
 			
 		});

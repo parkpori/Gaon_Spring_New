@@ -53,6 +53,10 @@
 			position: absolute;
 			display: none;
 		}
+		#constract_ck1 {
+			position: absolute;
+			display: none;
+		}
 		.inner_box > label {
 			display: block;
 			background: url('${path}/resources/img/check_off.gif') 100% 50% no-repeat;
@@ -142,7 +146,7 @@
 		<div id="constract_title">이용약관</div>
 		<div class="constract_box">
 			<div class="inner_box" id="inner_box_all">
-				<input type="checkbox" class="constract_ck" id="constract_ck1">
+				<input type="checkbox" id="constract_ck1">
 				<label for="constract_ck1">
 						이용약관, 개인정보 수집 및 이용, 위치정보 이용약관(선택),<br>
 						프로모션 안내메일 수신(선택)에 모두 동의합니다.
@@ -233,7 +237,6 @@
 			
 			$("#constract_ck1").click(function(){
 				var ckAll = $("#constract_ck1").is(":checked");
-				
 				if(ckAll == true) {
 				$(".constract_ck").prop("checked", true);
 				} else {
@@ -242,25 +245,9 @@
 			});
 			
 			$(".constract_ck").click(function(){
-				var ck2 = $("#constract_ck2").is(":checked");
-				var ck3 = $("#constract_ck3").is(":checked");
-				var ck4 = $("#constract_ck4").is(":checked");
-				var ck5 = $("#constract_ck5").is(":checked");
-				
-				if(ck2 == true) {
-					if (ck3 == true) {
-						if (ck4 == true) {
-							if (ck5 == true) {
-								$("#constract_ck1").prop("checked", true);
-							} else {
-								$("#constract_ck1").prop("checked", false);
-							}
-						} else {
-							$("#constract_ck1").prop("checked", false);
-						}
-					} else {
-						$("#constract_ck1").prop("checked", false);
-					}
+				var ckleng = $(".constract_ck:checkbox:checked").length;
+				if (ckleng == 4) {
+					$("#constract_ck1").prop("checked", true);
 				} else {
 					$("#constract_ck1").prop("checked", false);
 				}

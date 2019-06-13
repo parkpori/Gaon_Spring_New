@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../include/header.jsp" %>
 <c:choose>
-	<c:when test="${sessionScope.loginUser == null}">
+	<c:when test="${sessionScope.userid == null}">
 		<script>
 			alert("로그인 하신 후 사용하세요.");
 			location.href="${path}/boardList.gaon?message=nologin";
@@ -13,9 +13,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="${path}/css/common.css?v=1">
+<link rel="stylesheet" href="${path}/resources/css/common.css?v=1">
 <title>Insert title here</title>
-<script type="text/javascript" src="${path}/smarteditor/js/service/HuskyEZCreator.js" charset="utf-8"></script>
+<script type="text/javascript" src="${path}/resources/smarteditor/js/service/HuskyEZCreator.js" charset="utf-8"></script>
 <style type="text/css">
 	.board_div {
 		width: 1000px;
@@ -49,11 +49,6 @@
 		padding-left: 15px;
 		color: #7BA518;
 		background: white;
-	}
-	.board_pw {
-		display: flex;
-		align-items: center;
-		flex: 1;
 	}
 	.name_pw > div > input {
 		/* width: 289px; */
@@ -205,20 +200,16 @@
 </style>
 </head>
 <body>
-	<form action="registerPlay.gaon" method="POST" name="frm_mem" id="frm_mem" enctype="multipart/form-data">
+	<form action="${path}/board/create" method="POST" name="frm_mem" id="frm_mem">
 		<div class="board_div">
 	        <div id="all_title">질문 게시판</div>
 	        <div class="board_all">
 	        	<div class="name_pw">
 	        		<div class="board_name">
 		        		<span>작성자</span>
-						<div class="board_id">${sessionScope.loginUser.id}</div>
-						<input type="hidden" name="writer" value="${sessionScope.loginUser.id}">
+						<div class="board_id">${sessionScope.userid}</div>
+						<input type="hidden" name="writer" value="${sessionScope.userid}">
 		        	</div>
-<!-- 		        <div class="board_pw">
-		        		<span>비밀번호*</span>
-						<input type="password" name="">
-		        	</div> -->
 	        	</div>
 	        	<div class="board_title">
 	        		<span>제목</span>
@@ -232,8 +223,9 @@
 							nhn.husky.EZCreator.createInIFrame({
 							 oAppRef: oEditors,
 							 elPlaceHolder: "contentinsert",
-							 sSkinURI: "<%=request.getContextPath()%>/smarteditor/SmartEditor2Skin.html",
-							 fCreator: "createSEditor2"
+								sSkinURI: "${path}/resources/smarteditor/SmartEditor2Skin.html",
+								fCreator: "createSEditor2",
+								htParams:{fOnBeforeUnload : function(){} }
 							});
 						</script>
 	        	</div>
@@ -247,7 +239,7 @@
 	        	</div>
 	        	<div class="board_btn">
 	        		<span>
-	        			<a href="boardList.gaon" class="btn_default white_btn">취소</a>
+	        			<a href="${path}/board/list" class="btn_default white_btn">취소</a>
 	        			<a class="btn_agree">확인</a>
 	        		</span>
 	        	</div>
@@ -269,6 +261,7 @@
 			$(".btn_agree").click(function(){
 				
 				oEditors.getById["contentinsert"].exec("UPDATE_CONTENTS_FIELD", []);
+				// textarea에 스마트에디터의 값을 알려줌
 				
 				var title = $("#titleinsert").val();
 				var content = $("#contentinsert").val();

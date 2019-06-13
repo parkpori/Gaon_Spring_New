@@ -514,7 +514,7 @@
 		});
 		
 		$(document).on("click", "#modal_agree", function(){
-			location.href="removePlay.gaon?bno=${one.bno}&filename=${one.filename}";
+			location.href="${path}/board/delete?bno=${one.bno}";
 		});
 		
 		$(document).on("click", ".madal_default", function(){

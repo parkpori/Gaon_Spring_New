@@ -22,7 +22,7 @@ public class BoardDTO {
 	private int viewcnt;
 	private int replycnt;
 	private int goodcnt;
-	private String id; // 작성자 이름(tbl_member 테이블과 조인)
+	private String id; // 작성자 아이디(tbl_member 테이블과 조인)
 	private Date regdate;
 	private String filename;
 	private int filesize;
