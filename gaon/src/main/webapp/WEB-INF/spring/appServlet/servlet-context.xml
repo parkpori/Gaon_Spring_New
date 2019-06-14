@@ -32,7 +32,9 @@
 	<context:component-scan base-package="com.gaon.controller" />
 	<context:component-scan base-package="com.gaon.service" />
 	<context:component-scan base-package="com.gaon.persistence" />
+	<context:component-scan base-package="com.gaon.aop" />
 	
+	<!-- AOP의 설정으로 Proxy 객체를 자동으로 생성 -->
 	<aop:aspectj-autoproxy />
 	
 	<!-- 인터셉터 빈을 등록, @하지않고 강제로 servlet-context에 넣어주고 beans 생성 -->

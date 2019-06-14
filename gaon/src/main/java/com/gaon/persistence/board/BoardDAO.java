@@ -8,7 +8,7 @@ import com.gaon.domain.board.BoardDTO;
 
 public interface BoardDAO {
 	public void create(BoardDTO bDto);  // 게시글 등록
-	public void upadate(BoardDTO bDto); // 게시글 수정
+	public void update(BoardDTO bDto);  // 게시글 수정
 	public void delete(int bno); 		// 게시글 삭제
 	public BoardDTO read(int bno);		// 상세게시글
 	// 게시글 목록(페이지 나누기, 검색기능 포함)
@@ -19,4 +19,14 @@ public interface BoardDAO {
 	public int countArticle(String search_option, String keyword);
 	// 게시글 등록
 	public void createPlay(BoardDTO bDto);
+	// bno, id가 같은 데이터가 있는지 체크
+	public int goodCheck(int bno, String id);
+	// 좋아요 감소
+	public void goodDelete(int bno, String id);
+	// 좋아요 증가
+	public void goodAdd(int bno, String id);
+	// 좋아요 총 개수 띄우기
+	public int goodTotal(int bno, String id);
+	// 좋아요 개수 수정
+	public void goodUpdate(int bno, int goodTotal);
 }

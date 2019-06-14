@@ -23,7 +23,7 @@ public class ReplyController {
 	@Inject
 	private ReplyService service;
 	
-	//ajax식일때는 ResponsBody를 붙이지 않는다.
+	//ajax이지만 commentlist의 데이터가 바뀌어도 view.jsp는 데이터를 모르기 때문에 ResponsBody를 붙이지 않는다.
 	@RequestMapping(value="/list", method=RequestMethod.GET)
 	public String list(int bno, Model model) {
 		log.info(">>>>> 댓글목록 출력");

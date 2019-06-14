@@ -29,15 +29,13 @@ public class BoardDAOImpl implements BoardDAO {
 	}
 
 	@Override
-	public void upadate(BoardDTO bDto) {
-		// TODO Auto-generated method stub
-		
+	public void update(BoardDTO bDto) {
+		sqlSession.update("board.update", bDto);
 	}
 
 	@Override
 	public void delete(int bno) {
-		// TODO Auto-generated method stub
-		
+		sqlSession.delete("board.delete", bno);
 	}
 
 	@Override
@@ -75,4 +73,45 @@ public class BoardDAOImpl implements BoardDAO {
 	public void createPlay(BoardDTO bDto) {
 		sqlSession.insert("board.insert", bDto);
 	}
+
+	@Override
+	public int goodCheck(int bno, String id) {
+		HashMap<Object, Object> map = new HashMap<Object, Object>();
+		map.put("bno", bno);
+		map.put("id", id);
+		return sqlSession.selectOne("board.goodCheck", map);
+	}
+
+	@Override
+	public void goodDelete(int bno, String id) {
+		HashMap<Object, Object> map = new HashMap<Object, Object>();
+		map.put("bno", bno);
+		map.put("id", id);
+		sqlSession.update("board.goodDel", map);
+	}
+
+	@Override
+	public void goodAdd(int bno, String id) {
+		HashMap<Object, Object> map = new HashMap<Object, Object>();
+		map.put("bno", bno);
+		map.put("id", id);
+		sqlSession.update("board.goodAdd", map);
+	}
+
+	@Override
+	public int goodTotal(int bno, String id) {
+		HashMap<Object, Object> map = new HashMap<Object, Object>();
+		map.put("bno", bno);
+		map.put("id", id);
+		return sqlSession.selectOne("board.goodTotal", map);
+	}
+	
+	@Override
+	public void goodUpdate(int bno, int goodTotal) {
+		HashMap<Object, Object> map = new HashMap<Object, Object>();
+		map.put("bno", bno);
+		map.put("goodTotal", goodTotal);
+		sqlSession.update("board.goodUpdate", map);
+	}
+	
 }

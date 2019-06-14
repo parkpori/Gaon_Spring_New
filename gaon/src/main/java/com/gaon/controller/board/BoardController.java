@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.gaon.domain.board.BoardDTO;
@@ -89,13 +90,44 @@ public class BoardController {
 	public String createPlay(BoardDTO bDto) {
 		log.info(">>>>> 게시글 등록 액션!");
 		service.createPlay(bDto);
+		return "redirect:view?bno=" + bDto.getBno();
+	}
+	
+	@RequestMapping(value="update", method=RequestMethod.GET)
+	public String updateView(int bno, Model model) {
+		log.info(">>>>> 게시글 수정 페이지 출력");
+		BoardDTO bDto = service.read(bno);
+		model.addAttribute("one", bDto);
+		return "board/update";
+	}
+	
+	@RequestMapping(value="update", method=RequestMethod.POST)
+	public String updatePlay(BoardDTO bDto, Model model) {
+		log.info(">>>>> 게시글 수정 액션!");
+		service.update(bDto);
+		return "redirect:view?bno=" + bDto.getBno();
+	}
+	
+	@RequestMapping(value="delete", method=RequestMethod.GET)
+	public String delete(int bno) {
+		log.info(">>>>> 게시글 삭제 액션!");
+		service.delete(bno);
 		return "redirect:list";
 	}
 	
-	public String delete(int bno) {
-		log.info(">>>>> 게시글 삭제");
-		service.delete(bno);
-		return "";
+	@ResponseBody
+	@RequestMapping(value="good", method=RequestMethod.POST)
+	public void goodcnt(int bno, String id, Model model) {
+		log.info(">>>>> 좋아요 증가, 감소");
+		service.goodcnt(bno, id);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="goodTotal", method=RequestMethod.POST)
+	public HashMap<Object, Object> goodTotal(int bno, String id) {
+		log.info(">>>>> 좋아요 총 개수 출력");
+		HashMap result = service.goodTotal(bno, id);
+		return result;
 	}
 		
 }

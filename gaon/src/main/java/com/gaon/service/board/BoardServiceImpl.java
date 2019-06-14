@@ -1,15 +1,20 @@
 package com.gaon.service.board;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.gaon.domain.board.BoardDTO;
 import com.gaon.persistence.board.BoardDAO;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Repository
 public class BoardServiceImpl implements BoardService {
 	
@@ -21,16 +26,15 @@ public class BoardServiceImpl implements BoardService {
 		// TODO Auto-generated method stub
 		
 	}
-
+	
 	@Override
-	public void upadate(BoardDTO bDto) {
-		// TODO Auto-generated method stub
-		
+	public void update(BoardDTO bDto) {
+		bDao.update(bDto);
 	}
 
 	@Override
 	public void delete(int bno) {
-		
+		bDao.delete(bno);
 	}
 
 	@Override
@@ -68,6 +72,34 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public void createPlay(BoardDTO bDto) {
 		bDao.createPlay(bDto);
+	}
+	
+	@Transactional
+	@Override
+	public void goodcnt(int bno, String id) {
+		int goodCheck = bDao.goodCheck(bno, id);
+		if (goodCheck > 0) {
+			// -1 해줌(좋아요를 이미 눌렀기 때문)
+			log.info(">>>>> goodcnt - 1");
+			bDao.goodDelete(bno, id);
+		} else {
+			// +1 해줌
+			log.info(">>>>> goodcnt + 1");
+			bDao.goodAdd(bno, id);
+		}
+	}
+
+	@Override
+	public HashMap<Object, Object> goodTotal(int bno, String id) {
+		int goodCheck = bDao.goodCheck(bno, id);
+		int goodTotal = bDao.goodTotal(bno, id);
+		log.info(">>>>> goodCheck : " + goodCheck);
+		log.info(">>>>> goodTotal : " + goodTotal);
+		HashMap<Object, Object> map = new HashMap<Object, Object>();
+		bDao.goodUpdate(bno, goodTotal);
+		map.put("goodCheck", goodCheck);
+		map.put("goodTotal", goodTotal);
+		return map;
 	}
 	
 }

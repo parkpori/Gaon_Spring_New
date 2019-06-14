@@ -478,7 +478,7 @@
 							<a class="btn_good white_btn" id="btn_good">좋아요</a>
 						</c:if>
 						<c:if test="${sessionScope.userid == one.writer}">
-							<a href="${path}/boardupdate.gaon?bno=${one.bno}" class="btn_modify white_btn" id="btn_modify">수정</a>
+							<a href="${path}/board/update?bno=${one.bno}" class="btn_modify white_btn" id="btn_modify">수정</a>
 							<a class="btn_delete black_btn" id="btn_delete">삭제</a>
 						</c:if>
 					</div>
@@ -587,19 +587,16 @@
 			});
 		}
 		
-		
 		function goodCnt(){
 			var bno = "${one.bno}";
 			var id = "${sessionScope.userid}";
 			
 			$.ajax({
 				type: "POST",
-				url: "${path}/board/good",
-				dataType: "json",
-				data: "bno=" + bno + "&id=" + id,
-				success: function(goodTotal){
+				url: "${path}/board/good?bno=" + bno + "&id=" + id,
+				success: function(){
 					goodtotal();
-					
+					// goodCheck가 0이면 +1, 1이면 -1
 				}, error: function(){
 					alert("good Error!!");
 				}
@@ -612,20 +609,20 @@
 		
 		$.ajax({
 			type: "POST",
-			url: "goodTotal.gaon",
-			dataType: "json",
-			data: "bno=" + bno + "&id=" + id,
-			success: function(data){
-				if (data.message == 0) {
+			url: "${path}/board/goodTotal?bno=" + bno + "&id=" + id,
+			success: function(goodTotal){
+				alert("goodCheck : " + goodCheck);
+				alert("goodTotal : " + goodTotal);
+				if (goodCheck > 0) {
 					$("#btn_good").css("background", "white")
-		  			  			  .css("border", "1px solid #aaa")
-		  			  			  .css("color", "#aaa");
-					$("#goodcnt").text(data.goodTotal);
+		  			  .css("border", "1px solid #aaa")
+		  			  .css("color", "#aaa");
+					$("#goodcnt").text(goodTotal);
 				} else {
 					$("#btn_good").css("background", "#333")
-					  			  .css("border", "1px solid #333")
-					  			  .css("color", "white");
-					$("#goodcnt").text(data.goodTotal);
+		  			  .css("border", "1px solid #333")
+		  			  .css("color", "white");
+					$("#goodcnt").text(goodTotal);
 				}
 			}, error: function(){
 				alert("goodTotal Error!!");

@@ -14,9 +14,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="${path}/css/common.css?v=1">
+<link rel="stylesheet" href="${path}/resources/css/common.css?v=1">
 <title>Insert title here</title>
-<script type="text/javascript" src="${path}/smarteditor/js/service/HuskyEZCreator.js" charset="utf-8"></script>
+<script type="text/javascript" src="${path}/resources/smarteditor/js/service/HuskyEZCreator.js" charset="utf-8"></script>
 <style type="text/css">
 	.board_div {
 		width: 1000px;
@@ -246,7 +246,7 @@
 </style>
 </head>
 <body>
-	<form action="modifyPlay.gaon" method="POST" name="frm_mem" id="frm_mem" enctype="multipart/form-data">
+	<form action="${path}/board/update" method="POST" name="frm_mem" id="frm_mem">
 		<div class="board_div">
 	        <div id="all_title">질문 게시판</div>
 	        <div class="board_all">
@@ -274,8 +274,9 @@
 							nhn.husky.EZCreator.createInIFrame({
 							 oAppRef: oEditors,
 							 elPlaceHolder: "contentinsert",
-							 sSkinURI: "<%=request.getContextPath()%>/smarteditor/SmartEditor2Skin.html",
-							 fCreator: "createSEditor2"
+							 sSkinURI: "${path}/resources/smarteditor/SmartEditor2Skin.html",
+								fCreator: "createSEditor2",
+								htParams:{fOnBeforeUnload : function(){} }
 							});
 						</script>
 	        	</div>
