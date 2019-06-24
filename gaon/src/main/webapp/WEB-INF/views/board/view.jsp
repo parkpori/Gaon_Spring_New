@@ -494,14 +494,16 @@
 	<%@ include file="../include/footer.jsp" %>
 	
 	<script type="text/javascript">
+		
 		$(document).ready(function(){
+			
 			/* 문서가 준비되면 댓글 목록을 조회하는 AJAX 실행 */
 			comment_list();
-			goodtotal();
+			goodCheck();
 		});
 		
 		$(document).on("click", "#btn_good", function(){
-			goodCnt();
+			goodUpdate();
 		});
 	
 		// =가 있으면 앞에 변수를 출력하겠다는 의미
@@ -586,50 +588,63 @@
 				}
 			});
 		}
+		function goodCheck(){
+			var bno = "${one.bno}";
+			var id = "${sessionScope.userid}"; 
+			$.ajax({
+				type: "POST",
+				url: "${path}/board/goodCheck?bno="+bno+"&id="+id,
+				async: false, // ajax가 끝날때까지 return이 되지 않게 해줌
+				success: function(data){
+					if (data > 0) {
+						$("#btn_good").css("background", "#333")
+			  						.css("border", "1px solid #333")
+			  						.css("color", "white");
+					} else {
+						$("#btn_good").css("background", "white")
+			  						.css("border", "1px solid #aaa")
+			  						.css("color", "#aaa");
+					}
+					goodTotal();
+				}, error: function(){
+					alert("goodCheck Error!!");
+				}
+			});
+		}
 		
-		function goodCnt(){
+		function goodTotal(){
 			var bno = "${one.bno}";
 			var id = "${sessionScope.userid}";
 			
 			$.ajax({
 				type: "POST",
-				url: "${path}/board/good?bno=" + bno + "&id=" + id,
+				url: "${path}/board/goodTotal?bno=" + bno + "&id=" + id,
+				success: function(data){
+					$("#goodcnt").text(data);
+				}, error: function(){
+					alert("goodTotal Error!!");
+				}
+				
+			});
+		}
+		
+		function goodUpdate(){
+			var bno = "${one.bno}";
+			var id = "${sessionScope.userid}";
+
+			$.ajax({
+				type: "POST",
+				url: "${path}/board/goodCnt?bno=" + bno + "&id=" + id,
 				success: function(){
-					goodtotal();
+					goodCheck();
 					// goodCheck가 0이면 +1, 1이면 -1
 				}, error: function(){
-					alert("good Error!!");
+					alert("goodCnt Error!!");
 				}
 			});
 		 }
 		
-	function goodtotal(){
-		var bno = "${one.bno}";
-		var id = "${sessionScope.userid}";
-		
-		$.ajax({
-			type: "POST",
-			url: "${path}/board/goodTotal?bno=" + bno + "&id=" + id,
-			success: function(goodTotal){
-				alert("goodCheck : " + goodCheck);
-				alert("goodTotal : " + goodTotal);
-				if (goodCheck > 0) {
-					$("#btn_good").css("background", "white")
-		  			  .css("border", "1px solid #aaa")
-		  			  .css("color", "#aaa");
-					$("#goodcnt").text(goodTotal);
-				} else {
-					$("#btn_good").css("background", "#333")
-		  			  .css("border", "1px solid #333")
-		  			  .css("color", "white");
-					$("#goodcnt").text(goodTotal);
-				}
-			}, error: function(){
-				alert("goodTotal Error!!");
-			}
-			
-		});
-	}
+	
 	</script>
 </body>
 </html>

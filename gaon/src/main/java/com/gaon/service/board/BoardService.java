@@ -20,8 +20,10 @@ public interface BoardService {
 	public int countArticle(String search_option, String keyword);
 	// 게시글 등록
 	public void createPlay(BoardDTO bDto);
+	// 좋아요 체크
+	public int goodCheck(int bno, String id);
 	// 좋아요 증가, 감소
-	public void goodcnt(int bno, String id);
+	public void goodCnt(int bno, String id);
 	// 좋아요 총 개수 출력
-	public HashMap<Object, Object> goodTotal(int bno, String id);
+	public int goodTotal(int bno, String id);
 }

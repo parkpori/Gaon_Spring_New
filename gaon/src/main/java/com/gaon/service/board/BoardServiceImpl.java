@@ -74,9 +74,15 @@ public class BoardServiceImpl implements BoardService {
 		bDao.createPlay(bDto);
 	}
 	
+
+	@Override
+	public int goodCheck(int bno, String id) {
+		return bDao.goodCheck(bno, id);
+	}
+	
 	@Transactional
 	@Override
-	public void goodcnt(int bno, String id) {
+	public void goodCnt(int bno, String id) {
 		int goodCheck = bDao.goodCheck(bno, id);
 		if (goodCheck > 0) {
 			// -1 해줌(좋아요를 이미 눌렀기 때문)
@@ -90,16 +96,11 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public HashMap<Object, Object> goodTotal(int bno, String id) {
-		int goodCheck = bDao.goodCheck(bno, id);
+	public int goodTotal(int bno, String id) {
 		int goodTotal = bDao.goodTotal(bno, id);
-		log.info(">>>>> goodCheck : " + goodCheck);
-		log.info(">>>>> goodTotal : " + goodTotal);
-		HashMap<Object, Object> map = new HashMap<Object, Object>();
 		bDao.goodUpdate(bno, goodTotal);
-		map.put("goodCheck", goodCheck);
-		map.put("goodTotal", goodTotal);
-		return map;
+		log.info(">>>>> goodTotal : " + goodTotal);
+		return goodTotal;
 	}
 	
 }

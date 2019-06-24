@@ -115,17 +115,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		VALUES(#{bno}, #{id})
 	</update>
 	
+		<update id="goodUpdate" parameterType="hashmap">
+		UPDATE tbl_board
+		SET goodcnt = #{goodTotal}
+		WHERE bno = #{bno}
+	</update>
+	
 	<select id="goodTotal" parameterType="hashmap" resultType="int">
 		SELECT COUNT(*)
 		FROM tbl_good
 		WHERE bno = #{bno}
 	</select>
 	
-	<update id="goodUpdate" parameterType="hashmap">
-		UPDATE tbl_board
-		SET goodcnt = #{goodTotal}
-		WHERE bno = #{bno}
-	</update>
 </mapper>
 
 

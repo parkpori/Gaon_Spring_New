@@ -116,18 +116,27 @@ public class BoardController {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value="good", method=RequestMethod.POST)
-	public void goodcnt(int bno, String id, Model model) {
+	@RequestMapping(value="goodCheck", method=RequestMethod.POST)
+	public int goodCheck(int bno, String id) {
+		log.info(">>>>> 좋아요 체크");
+		int data = service.goodCheck(bno, id);
+		return data;
+	}
+	
+	
+	@ResponseBody
+	@RequestMapping(value="goodCnt", method=RequestMethod.POST)
+	public void goodCnt(int bno, String id) {
 		log.info(">>>>> 좋아요 증가, 감소");
-		service.goodcnt(bno, id);
+		service.goodCnt(bno, id);
 	}
 	
 	@ResponseBody
 	@RequestMapping(value="goodTotal", method=RequestMethod.POST)
-	public HashMap<Object, Object> goodTotal(int bno, String id) {
+	public int goodTotal(int bno, String id) {
 		log.info(">>>>> 좋아요 총 개수 출력");
-		HashMap result = service.goodTotal(bno, id);
-		return result;
+		int goodTotal = service.goodTotal(bno, id);
+		return goodTotal;
 	}
 		
 }

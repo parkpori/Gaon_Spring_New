@@ -25,8 +25,8 @@ public interface BoardDAO {
 	public void goodDelete(int bno, String id);
 	// 좋아요 증가
 	public void goodAdd(int bno, String id);
-	// 좋아요 총 개수 띄우기
-	public int goodTotal(int bno, String id);
 	// 좋아요 개수 수정
 	public void goodUpdate(int bno, int goodTotal);
+	// 좋아요 총 개수 띄우기
+	public int goodTotal(int bno, String id);
 }
