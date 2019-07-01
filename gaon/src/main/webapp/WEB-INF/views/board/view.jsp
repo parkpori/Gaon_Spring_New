@@ -434,28 +434,6 @@
 				<div class="board_div3">
 					<span class="board_span1">첨부파일</span>
 					<span class="board_span2">
-						<c:choose>
-		        			<c:when test="${one.filesize == 0}">
-		        				<span id="no_file">파일없음</span>
-		        			</c:when>
-		        			<c:otherwise>
-		        				<a href="download.gaon?file=${one.filename}">
-		        					${one.filename}
-		        				</a>
-		        				<span id="filesize">
-			        				<c:choose>
-			        					<c:when test="${one.filesize/1024/1024 > 1}">
-				        						(<fmt:formatNumber type="number" pattern="0.00" value="${one.filesize/1024/1024}">
-				        						</fmt:formatNumber>MB)
-			        					</c:when>
-			        					<c:otherwise>
-				        						(<fmt:formatNumber type="number" pattern="0.00" value="${one.filesize/1024}">
-				        						</fmt:formatNumber>KB)
-			        					</c:otherwise>
-			        				</c:choose>
-		        				</span>
-		        			</c:otherwise>
-	        			</c:choose>
 					</span>
 				</div>
 				<div class="board_div4">
@@ -471,7 +449,7 @@
 					<!-- 로그인 안 하면 리스트, 글쓰기, 답글 빼고 없앰 -->
 					<a href="${path}/board/list" class="btn_list white_btn" id="returnGo">리스트</a>
 					<c:if test="${!empty sessionScope.userid}">
-						<a class="btn_reply black_btn">답글</a>
+						<a href="${path}/board/answer?bno=${one.bno}" class="btn_reply black_btn">답글</a>
 					</c:if>
 					<div id="float_right">
 						<c:if test="${!empty sessionScope.userid}">
@@ -597,8 +575,8 @@
 				async: false, // ajax가 끝날때까지 return이 되지 않게 해줌
 				success: function(data){
 					if (data > 0) {
-						$("#btn_good").css("background", "#333")
-			  						.css("border", "1px solid #333")
+						$("#btn_good").css("background", "#E65D6E")
+			  						.css("border", "1px solid #E65D6E")
 			  						.css("color", "white");
 					} else {
 						$("#btn_good").css("background", "white")

@@ -29,4 +29,8 @@ public interface BoardDAO {
 	public void goodUpdate(int bno, int goodTotal);
 	// 좋아요 총 개수 띄우기
 	public int goodTotal(int bno, String id);
+	// 답글을 달려고 하는 게시글의 re_step보다 큰 답글들을 re_step + 1
+	public void updateStep(int ref, int re_step);
+	// 답글 테이블에 등록하기
+	public void answer(BoardDTO bDto);
 }

@@ -298,6 +298,16 @@
 	#file_icon {
 		color: #ff8224; 
 	}
+	#list_arrow {
+		font-size: 13px;
+		color: #ccc;
+		transform: rotate(-180deg);
+	}
+	.list_span {
+		display: inline-block;
+		width: 20px;
+	}
+	
 </style>
 </head>
 <body>
@@ -341,6 +351,12 @@
 	        			<td>${bDto.bno}</td>
 	        			<td class="content_title">
 	        				<a href="${path}/board/view?bno=${bDto.bno}">
+	        				<c:forEach begin="1" end="${bDto.re_level}">
+	        					<span class="list_span"></span>
+	        				</c:forEach>
+	        				<c:if test="${bDto.re_step > 1}">
+	        					<i class="fas fa-reply" id="list_arrow"></i>
+	        				</c:if>
 	        					${bDto.title}
 	        				</a>
 	        				
@@ -367,9 +383,9 @@
 	        			<td><i class="fas fa-heart heart"></i>${bDto.goodcnt}</td>
 	        			<td>${bDto.viewcnt}</td>
 	        			<td>
-	        			<c:if test="${bDto.filesize > 0}">
+	        			<%-- <c:if test="${bDto.filesize > 0}">
 	        				<i class="fas fa-paperclip" id="file_icon"></i>
-	        			</c:if>
+	        			</c:if> --%>
 	        		</tr>
         		</c:forEach>
         	</table>

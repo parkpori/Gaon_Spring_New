@@ -113,5 +113,18 @@ public class BoardDAOImpl implements BoardDAO {
 		map.put("goodTotal", goodTotal);
 		sqlSession.update("board.goodUpdate", map);
 	}
+
+	@Override
+	public void updateStep(int ref, int re_step) {
+		HashMap<String, Integer> map = new HashMap<>();
+		map.put("ref", ref);
+		map.put("re_step", re_step);
+		sqlSession.update("board.updateStep", map);
+	}
+
+	@Override
+	public void answer(BoardDTO bDto) {
+		sqlSession.insert("board.answer", bDto);
+	}
 	
 }

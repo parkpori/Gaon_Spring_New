@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,7 +25,7 @@ public class IndexController {
 	private ProductService service; // 의존성 주입(인스턴스 생성)
 	
 	@RequestMapping("/")
-	public String index(Model model) {
+	public String index(Model model, HttpSession session) {
 		log.info(">>>>> Index 페이지");
 		HashMap<String, List<ProductDTO>> map = service.productList(); // 의존성 주입
 		

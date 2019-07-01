@@ -26,4 +26,6 @@ public interface BoardService {
 	public void goodCnt(int bno, String id);
 	// 좋아요 총 개수 출력
 	public int goodTotal(int bno, String id);
+	// 답글 등록
+	public void answer(BoardDTO bDto);
 }

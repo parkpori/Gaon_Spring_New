@@ -25,9 +25,9 @@ public class LogAdvice {
 	
 	// execution경로에 //는 하위패키지들이 다 들어갈 수 있다는 의미 
 	// com.gaon.controller패키지 안에 있는 모든 컨트롤러 중에 Controller로 끝나는 클래스들 중 모든 메서드들
-	@Around("execution(* com.gaon.controller..*Controller.*(..))"
-			+ " or execution(* com.gaon.service..*Impl.*(..))"
-			+ " or execution(* com.gaon.persistence..*Impl.*(..))")
+	//@Around("execution(* com.gaon.controller..*Controller.*(..))"
+	//		+ " or execution(* com.gaon.service..*Impl.*(..))"
+	//		+ " or execution(* com.gaon.persistence..*Impl.*(..))")
 	public Object logPrint(ProceedingJoinPoint joinPoint) throws Throwable {
 		// 메서드 시작시간
 		long start = System.currentTimeMillis();

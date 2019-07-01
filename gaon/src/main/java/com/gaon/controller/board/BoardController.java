@@ -138,5 +138,37 @@ public class BoardController {
 		int goodTotal = service.goodTotal(bno, id);
 		return goodTotal;
 	}
+	
+	// 답글 등록 페이지 출력
+	@RequestMapping(value="answer", method=RequestMethod.GET)
+	public String answer(int bno, Model model) {
+		log.info(">>>>> 답글 등록 페이지 출력");
+		// 답글을 달려고 하는 게시글 내용
+		BoardDTO bDto = service.read(bno);
+		bDto.setContent(bDto.getContent()
+						+ "<br><br>------------------------------------------------------- 게시물 답글 -------------------------------------------------------<br><br><br>");
+		model.addAttribute("one", bDto);
+		return "board/answer";
+	}
+	
+	// 답글 등록 Action
+	@RequestMapping(value="answer", method=RequestMethod.POST)
+	public String answerPlay(BoardDTO bDto, HttpSession session) {
+		log.info(">>>>> 답글 등록 Play");
+		String writer = (String)session.getAttribute("userid");
+		bDto.setWriter(writer);
 		
+		// 기존게시글의 ref, re_step, re_level 가져오기
+		BoardDTO one = service.read(bDto.getBno());
+		log.info("기존 게시글 정보 =================");
+		log.info(one.toString());
+		log.info("==============================");
+		bDto.setRef(one.getRef());
+		bDto.setRe_step(one.getRe_step());
+		bDto.setRe_level(one.getRe_level());
+		
+		// DB등록
+		service.answer(bDto);
+		return "redirect:list";
+	}
 }

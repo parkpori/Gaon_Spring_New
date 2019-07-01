@@ -200,7 +200,8 @@
 </style>
 </head>
 <body>
-	<form action="${path}/board/create" method="POST" name="frm_mem" id="frm_mem">
+	<form action="${path}/board/answer" method="POST" name="frm_mem" id="frm_mem">
+		<input type="hidden" value="${one.bno}" name="bno">
 		<div class="board_div">
 	        <div id="all_title">질문 게시판</div>
 	        <div class="board_all">
@@ -213,11 +214,13 @@
 	        	</div>
 	        	<div class="board_title">
 	        		<span>제목</span>
-					<input type="text" id="titleinsert" name="title">
+					<input type="text" id="titleinsert" name="title" value="${one.title}" readonly="readonly">
 					<span id="board_title_text">제목, 내용을 입력해주세요.</span>
 	        	</div>
 	        	<div class="board_text">
-	        		<textarea id="contentinsert" name="content"></textarea>
+	        		<textarea id="contentinsert" name="content">
+	        			${one.content}
+	        		</textarea>
 	        			<script type="text/javascript">
 							var oEditors = [];
 							nhn.husky.EZCreator.createInIFrame({
@@ -240,6 +243,9 @@
 	</form>
 	<script type="text/javascript">
 		$(document).ready(function(){
+			
+			
+			
 			
 			$(".btn_agree").click(function(){
 				
