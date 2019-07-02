@@ -26,6 +26,13 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 			log.info("로그인 해주세요!!");
 			String referer = request.getHeader("referer"); // 이전페이지 주소를 가져옴
 			String uri = request.getRequestURI(); // uri는 /board/create를 알고 있음, 그래서 아래에 flashMap에 uri도 같이 넣어 보내줌
+			String query = request.getQueryString(); // 쿼리문도 같이 보내준다.
+			
+			if (query == null || query.equals("null")) {
+				query = "";
+			} else {
+				query = "?" + query;
+			}
 			
 			// 0번지부터 시작함
 			int index = referer.lastIndexOf("/"); // 뒤에서부터 /가 있는 번호를 알려주세요(1번째 글자, 2번째 글자... 6번째)
@@ -41,8 +48,8 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 			// Login 페이지로 이동
 			FlashMap flashMap = RequestContextUtils.getOutputFlashMap(request);
 			flashMap.put("message", "nologin"); // message에 nologin이라는 데이터를 담아 1회성으로 보내줌
-			flashMap.put("uri", uri);
-			log.info(">>>>> URI : " + uri);
+			flashMap.put("uri", (uri+query));
+			log.info(">>>>> URI : " + (uri+query));
 			
 			RequestContextUtils.saveOutputFlashMap(referer, request, response);
 			response.sendRedirect(referer);
