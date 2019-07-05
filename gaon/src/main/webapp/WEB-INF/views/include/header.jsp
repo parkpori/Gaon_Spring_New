@@ -25,11 +25,6 @@
                 <input type="text" id="login_id" placeholder="이메일 입력">
                 <input type="password" id="login_pw" placeholder="패스워드 입력">
             </div>
-            <div class="cklogin">
-                <input type="checkbox" id="cklogin_input">
-                <label for="cklogin_input" id="cklogin_label">
-                    <span>로그인 유지</span></label>
-            </div>
             <span class="login_box_inner" id="login_box_inner_id">
 	                    필수입력 정보입니다.
 	        </span>

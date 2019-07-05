@@ -405,7 +405,7 @@
     width: 350px;
     height: 440px;
     border-radius: 2px;
-    padding: 33px 30px;
+    padding: 46px 30px;
     box-shadow: 0 4px 10px 0 rgba(0,0,0,0.1),
                 0 4px 20px 0 rgba(0,0,0,0.12);
 }
@@ -428,7 +428,7 @@
     padding-right: 6px;
     width: 150px;
 }
-#login_id, #login_pw {
+#login_id {
     display: block;
     width: 100%;
     height: 40px;
@@ -439,7 +439,14 @@
     color: #444;
 }
 #login_pw {
-	margin-bottom: 4px;
+	display: block;
+    width: 100%;
+    height: 40px;
+    padding: 5px 10px;
+    margin: 8px 0 12px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    color: #444;
 }
 input::placeholder {
     color: #bbb;
@@ -481,7 +488,7 @@ input::placeholder {
     border: 0;
     color: white;
     border-radius: 5px;
-    margin: 5px auto 10px;
+    margin: 11px auto 10px;
     width: 100%;
     font-size: 15px;
     transition: .3s;
