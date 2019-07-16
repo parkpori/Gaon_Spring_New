@@ -23,9 +23,8 @@ public class BoardDAOImpl implements BoardDAO {
 	private SqlSession sqlSession;
 	
 	@Override
-	public void create(BoardDTO bDto) {
-		// TODO Auto-generated method stub
-		
+	public void createPlay(BoardDTO bDto) {
+		sqlSession.insert("board.insert", bDto);
 	}
 
 	@Override
@@ -67,11 +66,6 @@ public class BoardDAOImpl implements BoardDAO {
 		log.info(keyword);
 		
 		return sqlSession.selectOne("board.countArticle", map);
-	}
-
-	@Override
-	public void createPlay(BoardDTO bDto) {
-		sqlSession.insert("board.insert", bDto);
 	}
 
 	@Override
@@ -125,6 +119,11 @@ public class BoardDAOImpl implements BoardDAO {
 	@Override
 	public void answer(BoardDTO bDto) {
 		sqlSession.insert("board.answer", bDto);
+	}
+
+	@Override
+	public void addAttach(String fullname) {
+		sqlSession.insert("board.addAttach", fullname);
 	}
 	
 }

@@ -20,11 +20,18 @@ public class BoardServiceImpl implements BoardService {
 	
 	@Inject
 	private BoardDAO bDao;
-
+	
+	@Transactional
 	@Override
-	public void create(BoardDTO bDto) {
-		// TODO Auto-generated method stub
-		
+	public void createPlay(BoardDTO bDto) {
+		// 게시글 등록
+		bDao.createPlay(bDto);
+		// attach 테이블에 첨부파일 이름 추가
+		String[] files = bDto.getFiles();
+		if (files == null) return; // 첨부파일 없으면 skip
+		for (String name : files) {
+			bDao.addAttach(name); // attach 테이블에 insert
+		}
 	}
 	
 	@Override
@@ -68,12 +75,6 @@ public class BoardServiceImpl implements BoardService {
 	public int countArticle(String search_option, String keyword) {
 		return bDao.countArticle(search_option, keyword);
 	}
-
-	@Override
-	public void createPlay(BoardDTO bDto) {
-		bDao.createPlay(bDto);
-	}
-	
 
 	@Override
 	public int goodCheck(int bno, String id) {
