@@ -1,5 +1,7 @@
 package com.gaon.service.member;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import com.gaon.domain.member.MemberDTO;
@@ -23,5 +25,6 @@ public interface MemberService {
 	public String pwCheck(MemberDTO mDto);
 	// 비밀번호 수정
 	public void pwUpdate(MemberDTO mDto);
-
+	// member list 출력
+	public List<MemberDTO> list();
 }

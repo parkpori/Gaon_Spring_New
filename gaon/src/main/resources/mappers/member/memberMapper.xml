@@ -54,6 +54,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE id = #{id}
 	</update>
 	
+	<select id="memList" resultType="com.gaon.domain.member.MemberDTO">
+		SELECT *
+		FROM tbl_member
+	</select>
+	
 </mapper>
 
 

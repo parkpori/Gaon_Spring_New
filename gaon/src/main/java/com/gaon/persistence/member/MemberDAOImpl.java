@@ -1,5 +1,7 @@
 package com.gaon.persistence.member;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.apache.ibatis.session.SqlSession;
@@ -49,6 +51,11 @@ public class MemberDAOImpl implements MemberDAO {
 	@Override
 	public void pwUpdate(MemberDTO mDto) {
 		sqlSession.update("member.pwUpdate", mDto);
+	}
+
+	@Override
+	public List<MemberDTO> list() {
+		return sqlSession.selectList("member.memList");
 	}
 
 }

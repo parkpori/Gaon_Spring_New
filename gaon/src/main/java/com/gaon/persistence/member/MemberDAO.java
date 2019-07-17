@@ -1,5 +1,7 @@
 package com.gaon.persistence.member;
 
+import java.util.List;
+
 import com.gaon.domain.member.MemberDTO;
 
 public interface MemberDAO {
@@ -10,4 +12,5 @@ public interface MemberDAO {
 	public String login(MemberDTO mDto);
 	public MemberDTO viewMember(String id);
 	public void pwUpdate(MemberDTO mDto);
+	public List<MemberDTO> list();
 }

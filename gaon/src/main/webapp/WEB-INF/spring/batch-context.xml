@@ -13,4 +13,7 @@
 		<context:component-scan base-package="com.gaon.scheduler"/>
 		<task:scheduler id="jobScheduler" pool-size="10"/>
 		<task:annotation-driven scheduler="jobScheduler"/>
+		
+		<context:component-scan base-package="com.gaon.service"/>
+		<context:component-scan base-package="com.gaon.persistence"/>
 </beans>

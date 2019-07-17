@@ -1,5 +1,7 @@
 package com.gaon.service.member;
 
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
@@ -105,6 +107,11 @@ public class MemberServiceImpl implements MemberService {
 	public void pwUpdate(MemberDTO mDto) {
 		// DB에 있는 비밀번호를 수정
 		mDao.pwUpdate(mDto);
+	}
+
+	@Override
+	public List<MemberDTO> list() {
+		return mDao.list();
 	}
 	
 }
